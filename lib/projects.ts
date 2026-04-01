@@ -9,6 +9,7 @@ export interface Project {
   architecture: string;
   github: string;
   demo: string;
+  image: string;
 }
 
 export const projects: Project[] = [
@@ -40,7 +41,8 @@ export const projects: Project[] = [
     architecture:
       "Built on React 18 with Express.js backend servers, backed by PostgreSQL with raw SQL for complex reporting queries. Redis handles caching and session management. The frontend uses a combination of Tailwind CSS and MUI for a dense, data-rich operational interface.",
     github: "https://github.com/kvadou/ops-command-center",
-    demo: "#",
+    demo: "https://ops-command-center.onrender.com",
+    image: "/screenshots/ops-command-center.png",
   },
   {
     slug: "talent-acquisition-platform",
@@ -68,8 +70,9 @@ export const projects: Project[] = [
       "The company was paying $30,000/year for Greenhouse but only using a fraction of its features. The tool couldn't handle multi-market hiring workflows, lacked AI-powered candidate matching, and required manual workarounds for the company's unique interview and onboarding processes.",
     architecture:
       "Next.js 14 with App Router and server components for fast page loads. Prisma ORM manages 83 models across a PostgreSQL database extended with pgvector for AI similarity search. Clerk handles authentication with multi-tenant support. The AI pipeline uses OpenAI embeddings for resume vectorization and cosine similarity matching.",
-    github: "https://github.com/kvadou/talent-acquisition-platform",
-    demo: "#",
+    github: "https://github.com/kvadou/talent-platform",
+    demo: "https://talent-platform-mu.vercel.app",
+    image: "/screenshots/talent-platform.png",
   },
   {
     slug: "franchise-management-system",
@@ -98,8 +101,9 @@ export const projects: Project[] = [
       "Managing franchise prospects across an 8-stage pipeline required juggling spreadsheets, email threads, and manual territory analysis. There was no unified system to track prospects, manage financial agreements, or provide prospects with self-service access to franchise information.",
     architecture:
       "Next.js 14 with NextAuth v5 for role-based authentication across franchise owners and corporate admins. Prisma manages 80+ models with Stripe Connect handling franchise payment flows. Mapbox powers interactive territory maps for market analysis. The RAG chatbot uses embeddings for document retrieval with contextual AI responses.",
-    github: "https://github.com/kvadou/franchise-management-system",
-    demo: "#",
+    github: "https://github.com/kvadou/franchise-manager",
+    demo: "https://franchise-manager-liard.vercel.app",
+    image: "/screenshots/franchise-manager.png",
   },
   {
     slug: "workforce-training-portal",
@@ -125,8 +129,9 @@ export const projects: Project[] = [
       "A rapidly growing contractor workforce needed structured onboarding, ongoing training, and performance tracking. Existing LMS platforms were too generic, couldn't handle multi-market deployment, and lacked the gamification needed to keep a distributed contractor workforce engaged.",
     architecture:
       "Next.js 16 with Prisma 7 and NextAuth for authentication. TanStack Query handles client-side data fetching and caching. The multi-tenant architecture uses subdomain routing to serve market-specific content and configurations. The gamification engine tracks points, badges, and streaks with real-time leaderboards.",
-    github: "https://github.com/kvadou/workforce-training-portal",
-    demo: "#",
+    github: "https://github.com/kvadou/workforce-portal",
+    demo: "https://workforce-portal-kappa.vercel.app",
+    image: "/screenshots/workforce-portal.png",
   },
   {
     slug: "creative-studio",
@@ -156,7 +161,8 @@ export const projects: Project[] = [
     architecture:
       "React 18 frontend with Vite for fast development iteration, backed by Express.js with TypeScript. Prisma manages content models and project state. The RAG pipeline combines OpenAI embeddings for semantic search with keyword matching, fused via Reciprocal Rank Fusion (RRF) for optimal retrieval. Claude API powers content generation with retrieved context for citation grounding.",
     github: "https://github.com/kvadou/creative-studio",
-    demo: "#",
+    demo: "https://creative-studio-upgd.onrender.com",
+    image: "/screenshots/creative-studio.png",
   },
 ];
 

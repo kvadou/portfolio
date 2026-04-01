@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/lib/projects";
 import { TechBadge } from "./components/tech-badge";
 
@@ -57,8 +58,19 @@ export default function Home() {
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
-              className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/30 hover:bg-card-hover"
+              className="group overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent/30 hover:bg-card-hover"
             >
+              {project.image && (
+                <div className="relative h-40 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <div className="p-6">
               <h3 className="text-lg font-semibold text-foreground group-hover:text-accent">
                 {project.title}
               </h3>
@@ -79,6 +91,7 @@ export default function Home() {
                 <span className="text-xs font-medium text-accent">
                   View Case Study &rarr;
                 </span>
+              </div>
               </div>
             </Link>
           ))}
