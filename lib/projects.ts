@@ -9,7 +9,9 @@ export interface Project {
   architecture: string;
   github: string;
   demo: string;
+  demoAdmin?: string;
   image: string;
+  screenshots?: { src: string; label: string }[];
 }
 
 export const projects: Project[] = [
@@ -103,7 +105,15 @@ export const projects: Project[] = [
       "Next.js 14 with NextAuth v5 for role-based authentication across franchise owners and corporate admins. Prisma manages 80+ models with Stripe Connect handling franchise payment flows. Mapbox powers interactive territory maps for market analysis. The RAG chatbot uses embeddings for document retrieval with contextual AI responses.",
     github: "https://github.com/kvadou/franchise-manager",
     demo: "https://franchise-manager-liard.vercel.app",
+    demoAdmin: "https://franchise-manager-liard.vercel.app/admin",
     image: "/screenshots/franchise-manager.png",
+    screenshots: [
+      { src: "/screenshots/franchise-frontend.png", label: "Public Marketing Site" },
+      { src: "/screenshots/franchise-admin-dashboard.png", label: "Admin Command Center" },
+      { src: "/screenshots/franchise-admin-learning.png", label: "Learning Center" },
+      { src: "/screenshots/franchise-admin-franchisees.png", label: "Franchisee Management" },
+      { src: "/screenshots/franchise-admin-settings.png", label: "System Settings" },
+    ],
   },
   {
     slug: "workforce-training-portal",

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { projects, getProject } from "@/lib/projects";
 import { TechBadge } from "@/app/components/tech-badge";
 
@@ -66,13 +67,33 @@ export default async function ProjectPage({
         <p className="mt-4 text-lg leading-relaxed text-muted">
           {project.pitch}
         </p>
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
           >
-            Live Demo
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            {project.demoAdmin ? "Frontend Demo" : "Live Demo"}
           </a>
+          {project.demoAdmin && (
+            <a
+              href={project.demoAdmin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+            >
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Admin Demo
+            </a>
+          )}
           <a
             href={project.github}
             target="_blank"
@@ -105,6 +126,29 @@ export default async function ProjectPage({
           {project.architecture}
         </p>
       </section>
+
+      {/* Screenshots */}
+      {project.screenshots && project.screenshots.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-xl font-semibold text-foreground">Screenshots</h2>
+          <div className="mt-4 space-y-6">
+            {project.screenshots.map((ss, i) => (
+              <div key={i} className="overflow-hidden rounded-lg border border-border">
+                <Image
+                  src={ss.src}
+                  alt={ss.label}
+                  width={1400}
+                  height={875}
+                  className="w-full"
+                />
+                <div className="border-t border-border bg-card px-4 py-2">
+                  <span className="text-sm text-muted">{ss.label}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Key Features */}
       <section className="mt-10">
