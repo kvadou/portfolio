@@ -74,7 +74,12 @@ export const projects: Project[] = [
       "Next.js 14 with App Router and server components for fast page loads. Prisma ORM manages 83 models across a PostgreSQL database extended with pgvector for AI similarity search. Clerk handles authentication with multi-tenant support. The AI pipeline uses OpenAI embeddings for resume vectorization and cosine similarity matching.",
     github: "https://github.com/kvadou/talent-platform",
     demo: "https://talent-platform-mu.vercel.app",
-    image: "/screenshots/talent-platform.png",
+    image: "/screenshots/talent-dashboard.png",
+    screenshots: [
+      { src: "/screenshots/talent-dashboard.png", label: "Dashboard" },
+      { src: "/screenshots/talent-jobs.png", label: "Jobs Board" },
+      { src: "/screenshots/talent-candidates.png", label: "Candidate Pool" },
+    ],
   },
   {
     slug: "franchise-management-system",
