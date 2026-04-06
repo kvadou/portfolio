@@ -177,7 +177,7 @@ export const projects: Project[] = [
       "React 18 frontend with Vite for fast development iteration, backed by Express.js with TypeScript. Prisma manages content models and project state. The RAG pipeline combines OpenAI embeddings for semantic search with keyword matching, fused via Reciprocal Rank Fusion (RRF) for optimal retrieval. Claude API powers content generation with retrieved context for citation grounding.",
     github: "https://github.com/kvadou/creative-studio",
     demo: "https://creative-studio-upgd.onrender.com",
-    image: "/screenshots/creative-studio.png",
+    image: "/screenshots/creative-studio-home.png",
     screenshots: [
       { src: "/screenshots/creative-studio-home.png", label: "Home — Daily content suggestions, character roster, chess news feed" },
       { src: "/screenshots/creative-studio-curriculum.png", label: "Curriculum — Module browser with 31 lessons across 8 modules" },
