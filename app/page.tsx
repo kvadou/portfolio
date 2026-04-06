@@ -14,7 +14,7 @@ export default function Home() {
         <p className="mt-2 text-xl text-accent">Full-Stack Engineer</p>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
           I build production systems that replace expensive SaaS. Solo
-          full-stack engineer with 10+ applications in production — from
+          full-stack engineer with 5 applications in production — from
           operations platforms and AI-powered hiring tools to franchise
           management systems used daily by non-technical teams.
         </p>

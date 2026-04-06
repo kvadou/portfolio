@@ -4,7 +4,7 @@ import { TechBadge } from "@/app/components/tech-badge";
 export const metadata: Metadata = {
   title: "About — Doug Kvamme",
   description:
-    "Full-stack engineer who built 10+ production systems for a $3M education company as sole developer.",
+    "Full-stack engineer who built 5 production systems for a $3M education company as sole developer.",
 };
 
 const skills = {
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <p>
           I&apos;m a full-stack engineer who builds production systems that
           replace expensive SaaS. As the sole developer at a $3M education
-          company, I&apos;ve designed, built, and shipped 10+ applications —
+          company, I&apos;ve designed, built, and shipped 5 applications —
           from operations platforms and AI-powered hiring tools to franchise
           management systems and training portals.
         </p>
