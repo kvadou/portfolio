@@ -48,6 +48,12 @@ export const projects: Project[] = [
     screenshots: [
       { src: "/screenshots/occ-dashboard.png", label: "HQ Dashboard — Lessons, revenue, activity feed, and attention alerts" },
       { src: "/screenshots/occ-pipeline.png", label: "Client Conversion Tracker — Sales pipeline with multi-stage prospect management" },
+      { src: "/screenshots/occ-tutors.png", label: "Tutors — Workforce metrics, labels, and performance tracking for 8 tutors" },
+      { src: "/screenshots/occ-schools.png", label: "Schools — Partnership dashboard with billing, invoices, and term tracking" },
+      { src: "/screenshots/occ-clubs.png", label: "Clubs — Club management with student enrollment and scheduling" },
+      { src: "/screenshots/occ-marketing.png", label: "Marketing — AI-powered command center with ad spend analytics and content calendar" },
+      { src: "/screenshots/occ-analytics.png", label: "Analytics — KPIs, revenue trends, and lesson hours across all markets" },
+      { src: "/screenshots/occ-admin.png", label: "Admin — User management with role-based market access controls" },
     ],
   },
   {
