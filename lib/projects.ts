@@ -146,7 +146,13 @@ export const projects: Project[] = [
       "Next.js 16 with Prisma 7 and NextAuth for authentication. TanStack Query handles client-side data fetching and caching. The multi-tenant architecture uses subdomain routing to serve market-specific content and configurations. The gamification engine tracks points, badges, and streaks with real-time leaderboards.",
     github: "https://github.com/kvadou/workforce-portal",
     demo: "https://workforce-portal-kappa.vercel.app",
-    image: "/screenshots/workforce-portal.png",
+    image: "/screenshots/workforce-portal-dashboard.png",
+    screenshots: [
+      { src: "/screenshots/workforce-portal-dashboard.png", label: "Dashboard — Tutor command center with announcements and monthly updates" },
+      { src: "/screenshots/workforce-portal-course.png", label: "Curriculum — Course browser with modules, lessons, and learning structure" },
+      { src: "/screenshots/workforce-portal-onboarding.png", label: "Onboarding — Phased training pipeline with video lessons and quizzes" },
+      { src: "/screenshots/workforce-portal-admin.png", label: "Admin — Operations dashboard with pipeline, training, and engagement metrics" },
+    ],
   },
   {
     slug: "creative-studio",
