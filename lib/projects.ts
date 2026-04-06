@@ -65,9 +65,9 @@ export const projects: Project[] = [
       "Multi-market RBAC with granular permission controls",
       "E-signature workflows for offer letters and onboarding documents",
     ],
-    outcome: "Replaced $30k/year SaaS with custom solution",
+    outcome: "Replaced $12k/year SaaS with custom solution",
     problem:
-      "The company was paying $30,000/year for Greenhouse but only using a fraction of its features. The tool couldn't handle multi-market hiring workflows, lacked AI-powered candidate matching, and required manual workarounds for the company's unique interview and onboarding processes.",
+      "The company was paying $12,000/year for Greenhouse but only using a fraction of its features. The tool couldn't handle multi-market hiring workflows, lacked AI-powered candidate matching, and required manual workarounds for the company's unique interview and onboarding processes.",
     architecture:
       "Next.js 14 with App Router and server components for fast page loads. Prisma ORM manages 83 models across a PostgreSQL database extended with pgvector for AI similarity search. Clerk handles authentication with multi-tenant support. The AI pipeline uses OpenAI embeddings for resume vectorization and cosine similarity matching.",
     github: "https://github.com/kvadou/talent-platform",
