@@ -178,6 +178,14 @@ export const projects: Project[] = [
     github: "https://github.com/kvadou/creative-studio",
     demo: "https://creative-studio-upgd.onrender.com",
     image: "/screenshots/creative-studio.png",
+    screenshots: [
+      { src: "/screenshots/creative-studio-home.png", label: "Home — Daily content suggestions, character roster, chess news feed" },
+      { src: "/screenshots/creative-studio-curriculum.png", label: "Curriculum — Module browser with 31 lessons across 8 modules" },
+      { src: "/screenshots/creative-studio-images.png", label: "Illustrations — AI-generated and original art gallery with character tagging" },
+      { src: "/screenshots/creative-studio-video.png", label: "Video — Animated character videos with generation pipeline" },
+      { src: "/screenshots/creative-studio-audio.png", label: "Audio — Character voice design and dialogue generation" },
+      { src: "/screenshots/creative-studio-episodes.png", label: "Episodes — YouTube content pipeline with shot-by-shot production tracking" },
+    ],
   },
 ];
 
