@@ -44,7 +44,11 @@ export const projects: Project[] = [
       "Built on React 18 with Express.js backend servers, backed by PostgreSQL with raw SQL for complex reporting queries. Redis handles caching and session management. The frontend uses a combination of Tailwind CSS and MUI for a dense, data-rich operational interface.",
     github: "https://github.com/kvadou/ops-command-center",
     demo: "https://ops-command-center.onrender.com",
-    image: "/screenshots/ops-command-center.png",
+    image: "/screenshots/occ-dashboard.png",
+    screenshots: [
+      { src: "/screenshots/occ-dashboard.png", label: "HQ Dashboard — Lessons, revenue, activity feed, and attention alerts" },
+      { src: "/screenshots/occ-pipeline.png", label: "Client Conversion Tracker — Sales pipeline with multi-stage prospect management" },
+    ],
   },
   {
     slug: "talent-acquisition-platform",
