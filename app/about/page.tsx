@@ -211,7 +211,7 @@ export default function AboutPage() {
                 </div>
               </a>
               <a
-                href="mailto:doug@dougkvamme.com"
+                href="mailto:dougkvamme@gmail.com"
                 className="flex items-center gap-3 rounded-xl border border-border bg-background/50 p-4 text-muted transition-all hover:border-accent/20 hover:text-foreground"
               >
                 <svg className="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -219,7 +219,7 @@ export default function AboutPage() {
                 </svg>
                 <div>
                   <div className="text-sm font-medium text-foreground">Email</div>
-                  <div className="text-xs text-muted">doug@dougkvamme.com</div>
+                  <div className="text-xs text-muted">dougkvamme@gmail.com</div>
                 </div>
               </a>
             </div>

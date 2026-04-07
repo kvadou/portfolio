@@ -62,7 +62,7 @@ export default function Home() {
               LinkedIn
             </a>
             <a
-              href="mailto:doug@dougkvamme.com"
+              href="mailto:dougkvamme@gmail.com"
               className="group inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -227,7 +227,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="mailto:doug@dougkvamme.com"
+                href="mailto:dougkvamme@gmail.com"
                 className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20"
               >
                 Get in Touch
