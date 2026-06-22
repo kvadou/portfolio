@@ -23,9 +23,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Doug Kvamme — Full-Stack Engineer",
+  title: "Doug Kvamme — AI Engineer",
   description:
-    "Portfolio of Doug Kvamme, a full-stack engineer who builds production systems that replace expensive SaaS.",
+    "Portfolio of Doug Kvamme, an AI engineer and full-stack developer who ships production AI — RAG pipelines, vector search, and LLM features that real teams depend on.",
 };
 
 export default function RootLayout({

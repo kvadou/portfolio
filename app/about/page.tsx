@@ -5,7 +5,7 @@ import { Reveal } from "@/app/components/reveal";
 export const metadata: Metadata = {
   title: "About — Doug Kvamme",
   description:
-    "Full-stack engineer who built 5 production systems for a $3M education company as sole developer.",
+    "AI engineer and full-stack developer who shipped 5 production systems — including RAG pipelines and vector search — for a $3M education company as sole developer.",
 };
 
 const skills = {
@@ -92,22 +92,22 @@ export default function AboutPage() {
               About
             </span>
             <h1 className="mt-4 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              I build the tools that<br />businesses run on
+              I ship production AI,<br />not demos
             </h1>
             <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
               <p>
-                I&apos;m a full-stack engineer who builds production systems that
-                replace expensive SaaS. As the sole developer at a $3M education
-                company, I&apos;ve designed, built, and shipped 5 applications —
-                from operations platforms and AI-powered hiring tools to franchise
-                management systems and training portals.
+                I&apos;m an AI engineer and full-stack developer. As the sole
+                developer at a $3M education company, I&apos;ve designed, built,
+                and shipped 5 applications in production — including RAG pipelines,
+                pgvector candidate matching, and LLM-assisted workflows that real
+                teams rely on every day.
               </p>
               <p>
-                Every system I build is used daily by non-technical teams. That means
-                polished UI, reliable infrastructure, and thoughtful UX are
-                non-negotiable. I work across the full stack: database design,
-                API architecture, authentication, real-time features, AI integration,
-                and responsive frontends.
+                I work end to end: database design, API architecture, auth, vector
+                search and embeddings, prompt engineering, and the polished, reliable
+                frontends non-technical users depend on. I move fast with agentic,
+                AI-native development, and I hold a high bar before anything reaches
+                users. Working code in production is the only deliverable that counts.
               </p>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default function AboutPage() {
               Get in touch
             </h2>
             <p className="mt-3 text-muted">
-              Looking for a full-stack engineer who ships production systems?
+              Looking for an AI engineer who ships production systems, not demos?
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               <a
