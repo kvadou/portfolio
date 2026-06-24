@@ -4,8 +4,9 @@
 :root {
   --background: #fffffe;
   --foreground: #0c0c0f;
-  --accent: #b8860b;
-  --accent-hover: #9a7209;
+  /* deepened goldenrod: small label/eyebrow text on white now clears WCAG AA (~4.9:1) */
+  --accent: #946b07;
+  --accent-hover: #7a5806;
   --accent-glow: rgba(184, 134, 11, 0.15);
   --muted: #5f6c7b;
   --border: #e2e4e9;
@@ -221,4 +222,27 @@ body::before {
 
 .dark .hero-gradient {
   background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 185, 49, 0.08), transparent);
+}
+
+/* ========== Reduced motion ========== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Ensure entrance/scroll-reveal content lands visible rather than mid-animation */
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
