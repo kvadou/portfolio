@@ -212,7 +212,7 @@ export const projects: Project[] = [
     demoLabel: "workforce-portal-kappa.vercel.app",
     image: "/screenshots/workforce-portal-dashboard.png",
     screenshots: [
-      { src: "/screenshots/workforce-portal-dashboard.png", label: "Dashboard — training progress and course continuation at a glance" },
+      { src: "/screenshots/workforce-portal-dashboard.png", label: "Dashboard — training progress, course continuation, and latest updates" },
       { src: "/screenshots/workforce-portal-course.png", label: "Curriculum — course browser with modules, lessons, and structure" },
       { src: "/screenshots/workforce-portal-onboarding.png", label: "Onboarding — phased training pipeline with video lessons and quizzes" },
       { src: "/screenshots/workforce-portal-admin.png", label: "Admin — operations view of pipeline, training, and engagement metrics" },
