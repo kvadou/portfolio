@@ -87,7 +87,7 @@ export const projects: Project[] = [
     problem:
       "The company paid $12,000 a year for Greenhouse and used a fraction of it. It couldn't model multi-market hiring, had no AI candidate matching, and forced manual workarounds for the team's interview and onboarding process. The spend kept rising while the fit kept shrinking.",
     architecture:
-      "Next.js 14 with the App Router and server components for fast loads. Prisma manages 83 models over PostgreSQL extended with pgvector. The AI pipeline vectorizes resumes with OpenAI embeddings and ranks candidates by cosine similarity against each role, so matching is semantic rather than keyword-based. Clerk handles multi-tenant auth.",
+      "Next.js 14 with the App Router and server components for fast loads. Prisma manages 83 models over PostgreSQL extended with pgvector. The AI pipeline vectorizes resumes with OpenAI embeddings and ranks candidates by cosine similarity against each role, so matching is semantic rather than keyword-based. A live AI Screening Playground runs the same engine that powers production candidate screens: a GPT-4o-mini chat screener that scores each answer and a real browser voice call to a Retell AI agent. Clerk handles multi-tenant auth.",
     github: "https://github.com/kvadou/talent-platform",
     demo: "https://talent-platform-mu.vercel.app",
     demoLabel: "talent-platform-mu.vercel.app",
@@ -96,6 +96,7 @@ export const projects: Project[] = [
       { src: "/screenshots/talent-dashboard.png", label: "Dashboard — hiring pipeline health, open roles, and candidate flow" },
       { src: "/screenshots/talent-jobs.png", label: "Jobs Board — role management with stage and status tracking" },
       { src: "/screenshots/talent-candidates.png", label: "Candidate Pool — AI-ranked applicants scored by semantic fit" },
+      { src: "/screenshots/talent-playground.png", label: "AI Screening Playground — live chat + voice candidate screening with real-time scoring" },
     ],
   },
   {
