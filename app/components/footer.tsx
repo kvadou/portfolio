@@ -16,7 +16,7 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Full-stack engineer building production systems that replace expensive SaaS.
+              Forward deployed AI engineer. I re-engineer how work flows, then ship the agents that run it.
             </p>
           </div>
           <div>

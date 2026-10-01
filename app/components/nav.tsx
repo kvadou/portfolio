@@ -70,6 +70,12 @@ export function Nav() {
             )}
           </div>
           <Link
+            href="/method"
+            className="link-underline rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            Method
+          </Link>
+          <Link
             href="/about"
             className="link-underline rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-foreground"
           >
@@ -151,6 +157,13 @@ export function Nav() {
               </Link>
             ))}
           </div>
+          <Link
+            href="/method"
+            className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
+            onClick={() => setMobileOpen(false)}
+          >
+            Method
+          </Link>
           <Link
             href="/about"
             className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"

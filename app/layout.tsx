@@ -23,9 +23,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Doug Kvamme — AI Engineer",
+  title: "Doug Kvamme · Forward Deployed AI Engineer",
   description:
-    "Portfolio of Doug Kvamme, an AI engineer and full-stack developer who ships production AI — RAG pipelines, vector search, and LLM features that real teams depend on.",
+    "Portfolio of Doug Kvamme, a forward deployed AI engineer who maps real business processes, re-engineers them around agents, and ships production systems that non-technical teams run every day.",
 };
 
 export default function RootLayout({

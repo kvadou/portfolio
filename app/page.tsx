@@ -8,7 +8,7 @@ import { BrowserFrame } from "./components/browser-frame";
 const stats = [
   { value: "5", label: "Apps in Production" },
   { value: "4", label: "Shipped AI Features" },
-  { value: "600+", label: "API Routes" },
+  { value: "$10K/mo", label: "Spend Cut" },
   { value: "$54K+", label: "SaaS Replaced" },
 ];
 
@@ -25,27 +25,27 @@ export default function Home() {
             <div className="animate-fade-up">
               <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium tracking-wide text-accent">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-                Open to AI engineering roles
+                Open to forward deployed AI roles
               </span>
             </div>
             <h1 className="animate-fade-up delay-100 mt-7 font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Doug Kvamme
             </h1>
             <p className="animate-fade-up delay-200 mt-3 font-display text-xl text-accent sm:text-2xl">
-              AI Engineer · Full-Stack
+              Forward Deployed AI Engineer
             </p>
             <p className="animate-fade-up delay-300 mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              I ship production AI — RAG pipelines, vector search, and LLM features
-              that real teams depend on every day. Five applications live in
-              production, built end to end as a solo engineer, from the database
-              to the deploy.
+              I map how a business actually runs, sort every step into delete,
+              code, agent, or human, then ship the agents inside the systems teams
+              already use. Five production applications, built solo, run daily
+              by non-technical operators.
             </p>
             <div className="animate-fade-up delay-400 mt-9 flex flex-wrap gap-3">
               <Link
-                href="/projects/ops-command-center"
+                href="/method"
                 className="group inline-flex items-center gap-2.5 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20"
               >
-                View Work
+                How I Work
                 <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
