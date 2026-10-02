@@ -2,7 +2,7 @@
 // /brand shows every variant side by side.
 export type MarkVariant = "signal" | "board" | "period" | "plain";
 
-export const MARK: MarkVariant = "signal";
+export const MARK: MarkVariant = "board";
 
 export const markVariants: { id: MarkVariant; name: string; note: string }[] = [
   { id: "signal", name: "Signal", note: "Name plus the live green status dot from the board. Quiet, reads as 'in production'." },
