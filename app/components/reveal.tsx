@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
+// Content is visible by default. Only elements still below the fold when JS
+// runs are hidden and then revealed, so static loads and screenshots never
+// see blank sections.
 export function Reveal({
   children,
   className = "",
@@ -15,33 +18,21 @@ export function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
 
-    // Respect reduced-motion and guard against unsupported environments —
-    // reveal immediately so content is never stuck invisible.
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReduced || typeof IntersectionObserver === "undefined") {
-      el.classList.add("visible");
-      return;
-    }
-
-    // Safety net: if the observer never fires for any reason, reveal anyway.
-    const fallback = window.setTimeout(() => el.classList.add("visible"), 1200);
-
+    el.classList.add("pending");
+    const fallback = window.setTimeout(() => el.classList.remove("pending"), 2500);
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          window.setTimeout(() => el.classList.add("visible"), delay);
-          observer.unobserve(el);
-          window.clearTimeout(fallback);
-        }
+        if (!entry.isIntersecting) return;
+        window.setTimeout(() => el.classList.remove("pending"), delay);
+        observer.disconnect();
+        window.clearTimeout(fallback);
       },
-      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" }
     );
-
     observer.observe(el);
     return () => {
       observer.disconnect();

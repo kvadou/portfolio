@@ -1,10 +1,8 @@
 import type { ReactNode } from "react";
 
+// Section heading, not an eyebrow: a real h2 on a hairline.
 export function SectionLabel({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs font-semibold uppercase tracking-widest text-accent">{children}</span>
-      <span className="h-px flex-1 bg-border" />
-    </div>
+    <h2 className="border-t border-rule pt-5 text-2xl font-bold tracking-[-0.02em] text-ink sm:text-[1.75rem]">{children}</h2>
   );
 }

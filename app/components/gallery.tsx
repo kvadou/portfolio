@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Shot } from "@/lib/system";
-import { BrowserFrame } from "./browser-frame";
+import { ScreenFrame } from "./screen-frame";
 
 export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
   const [index, setIndex] = useState(0);
@@ -42,7 +42,7 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
         if (e.key === "ArrowLeft") go(-1);
       }}
     >
-      <BrowserFrame url={domain}>
+      <ScreenFrame domain={domain} right={`${String(index + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`}>
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -59,17 +59,15 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
             sizes="(max-width: 1024px) 100vw, 1100px"
             priority={index === 0}
           />
-          <span className="pointer-events-none absolute right-3 top-3 rounded-md bg-black/60 px-2 py-1 text-[11px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            Click to enlarge
+          <span className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-ink/85 px-2.5 py-1.5 text-xs font-medium text-panel opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            Enlarge
           </span>
         </button>
-      </BrowserFrame>
+      </ScreenFrame>
 
       <div className="mt-4 flex items-start justify-between gap-4">
-        <p className="min-h-[3rem] text-sm leading-relaxed text-muted" aria-live="polite">
-          <span className="mr-2 font-mono text-xs text-accent">
-            {String(index + 1).padStart(2, "0")}/{String(count).padStart(2, "0")}
-          </span>
+        <p className="min-h-[3rem] max-w-[70ch] text-sm leading-relaxed text-ink-2 sm:text-base" aria-live="polite">
+          <span className="data mr-2 text-signal">Fig. {index + 1}</span>
           {shot.caption}
         </p>
         {count > 1 && (
@@ -81,7 +79,7 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
       </div>
 
       {count > 1 && (
-        <div className="mt-4 flex gap-3 overflow-x-auto pb-2" role="tablist" aria-label="Screenshots">
+        <div className="rail -mx-4 mt-4 flex gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0" role="tablist" aria-label="Screenshots">
           {shots.map((s, i) => (
             <button
               key={s.src}
@@ -90,10 +88,10 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
               aria-selected={i === index}
               aria-label={s.caption}
               onClick={() => setIndex(i)}
-              className={`relative aspect-[16/10] w-36 shrink-0 overflow-hidden rounded-lg border transition-all ${
+              className={`relative aspect-[16/10] w-28 shrink-0 overflow-hidden rounded-md border transition-all sm:w-36 ${
                 i === index
-                  ? "border-accent ring-2 ring-accent/30"
-                  : "border-border opacity-60 hover:opacity-100"
+                  ? "border-ink ring-2 ring-signal-bright/40"
+                  : "border-rule opacity-60 hover:opacity-100"
               }`}
             >
               <Image src={s.src} alt="" fill className="object-cover object-top" sizes="144px" />
@@ -104,7 +102,7 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex flex-col bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex flex-col bg-ink/95"
           role="dialog"
           aria-modal="true"
           aria-label="Screenshot viewer"
@@ -158,7 +156,7 @@ function NavButton({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void
       type="button"
       onClick={onClick}
       aria-label={dir === "prev" ? "Previous screenshot" : "Next screenshot"}
-      className="rounded-lg border border-border p-2.5 text-muted transition-colors hover:border-accent/40 hover:text-foreground"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-rule bg-panel text-ink-2 transition-colors hover:border-ink hover:text-ink"
     >
       <Chevron dir={dir} />
     </button>

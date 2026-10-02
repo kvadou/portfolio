@@ -6,20 +6,13 @@ import { Gallery } from "@/app/components/gallery";
 import { SectionLabel } from "@/app/components/section-label";
 import { AiBadge } from "@/app/components/ai-badge";
 import { TechBadge } from "@/app/components/tech-badge";
+import { EvalLadder } from "@/app/components/eval-ladder";
 
 export const metadata: Metadata = {
   title: "Cash Forecast Eval · Doug Kvamme",
   description:
     "An independent eval service that grades a production cash forecast against settled bank cash every week, and only lets the model change on evidence.",
 };
-
-const accuracy = [
-  { label: "Launch baseline", value: 71, note: "Week by week, Aug 24" },
-  { label: "Live, week by week", value: 74, note: "Latest run, Oct 1" },
-  { label: "Live, rolling 4-week", value: 84, note: "Likely range 76 to 91%" },
-  { label: "Best replay candidate", value: 92, note: "Rolling 4-week, 64 weeks" },
-  { label: "Target", value: 95, note: "Rolling 4-week" },
-];
 
 const steps = [
   {
@@ -51,20 +44,20 @@ export default function CashForecastEvalPage() {
   const shots = shotsFor("cash-forecast-eval");
   return (
     <>
-      <section className="hero-gradient">
-        <div className="mx-auto max-w-6xl px-6 pb-14 pt-14 sm:pt-20">
-          <Link href="/#eval" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent">
+      <section>
+        <div className="mx-auto max-w-[1200px] px-4 md:px-8 pb-14 pt-14 sm:pt-20">
+          <Link href="/#eval" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back
+            Evals
           </Link>
           <div className="mt-8 max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-accent">Case study · Evals in production</span>
+              <span className="data text-signal">Case study</span>
               <AiBadge label="Model quality" />
             </div>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="mt-3 max-w-[22ch] text-[clamp(2.25rem,5vw,4rem)] font-extrabold leading-[1] tracking-[-0.03em] text-ink">
               A forecast that gets graded by something it can&apos;t influence
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted sm:text-xl">
@@ -74,50 +67,42 @@ export default function CashForecastEvalPage() {
             </p>
           </div>
 
-          <figure className="mt-12 rounded-2xl border border-border bg-card p-6 sm:p-8">
-            <figcaption className="text-sm font-semibold text-foreground">
-              Forecast accuracy <span className="font-normal text-muted">(1 minus weighted absolute % error on settled cash)</span>
-            </figcaption>
-            <div className="mt-6 space-y-4">
-              {accuracy.map((a) => (
-                <div key={a.label} className="grid grid-cols-[8.5rem_1fr] items-center gap-4 sm:grid-cols-[12rem_1fr]">
-                  <div>
-                    <div className="text-sm font-medium text-foreground">{a.label}</div>
-                    <div className="text-xs text-muted">{a.note}</div>
-                  </div>
-                  <div className="relative h-8 rounded-md bg-surface">
-                    <div
-                      className={`flex h-8 items-center justify-end rounded-md pr-3 text-sm font-bold ${
-                        a.label === "Target" ? "border-2 border-dashed border-accent text-accent" : "bg-accent text-background"
-                      }`}
-                      style={{ width: `${a.value}%` }}
-                    >
-                      {a.value}%
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </figure>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-6">
+      <section className="bg-field text-field-ink">
+        <div className="mx-auto grid max-w-[1200px] gap-12 px-4 py-16 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)] lg:items-center">
+          <div>
+            <p className="max-w-[24ch] text-[clamp(1.5rem,2.8vw,2.25rem)] font-bold leading-[1.15] tracking-[-0.02em]">
+              Most AI and forecasting work ships on vibes. This one has a referee, a ledger, and a rule that says the
+              model doesn&apos;t change until the numbers say so.
+            </p>
+            <p className="mt-5 max-w-[48ch] text-field-ink-2">
+              Accuracy is 1 minus weighted absolute percent error on settled cash. The target is 95% on the rolling
+              4-week grain.
+            </p>
+          </div>
+          <EvalLadder />
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-[1200px] px-4 md:px-8">
         <section className="py-16">
           <Reveal>
             <SectionLabel>How it works</SectionLabel>
           </Reveal>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2">
-            {steps.map((s, i) => (
-              <Reveal key={s.title} delay={i * 60}>
-                <li className="h-full rounded-xl border border-border bg-card p-6">
-                  <span className="font-display text-2xl font-bold text-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <h2 className="mt-2 font-display text-lg font-semibold text-foreground">{s.title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+          <Reveal>
+            <ol className="mt-8 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+              {steps.map((s, i) => (
+                <li key={s.title} className="relative border-t-2 border-ink pb-8 pt-4">
+                  <span className="absolute -top-[5px] left-0 h-2 w-2 rounded-full bg-signal-bright" aria-hidden="true" />
+                  <span className="data text-ink-2">Step {i + 1} of {steps.length}</span>
+                  <h3 className="mt-2 text-lg font-bold tracking-[-0.01em] text-ink">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-2">{s.body}</p>
                 </li>
-              </Reveal>
-            ))}
-          </ol>
+              ))}
+            </ol>
+          </Reveal>
         </section>
 
         {shots.length > 0 && (
@@ -148,7 +133,7 @@ export default function CashForecastEvalPage() {
             <ul className="mt-6 space-y-3">
               {caveats.map((c) => (
                 <li key={c} className="flex gap-3 text-sm leading-relaxed text-muted">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal-bright" aria-hidden="true" />
                   {c}
                 </li>
               ))}
@@ -156,7 +141,7 @@ export default function CashForecastEvalPage() {
           </Reveal>
         </section>
 
-        <section className="pb-16">
+        <section className="pb-24">
           <Reveal>
             <SectionLabel>Built with</SectionLabel>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -173,15 +158,6 @@ export default function CashForecastEvalPage() {
           </Reveal>
         </section>
 
-        <Reveal>
-          <section className="mb-20 rounded-2xl border border-accent/20 bg-accent/5 p-8 sm:p-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-accent">Why it matters</span>
-            <p className="mt-4 font-display text-2xl font-bold leading-snug text-foreground sm:text-3xl">
-              Most AI and forecasting work ships on vibes. This one has a referee, a ledger, and a rule that says the
-              model doesn&apos;t change until the numbers say so.
-            </p>
-          </section>
-        </Reveal>
       </div>
     </>
   );

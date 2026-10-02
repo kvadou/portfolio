@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { platform } from "@/lib/system";
+import { platform, shotsFor } from "@/lib/system";
+import { activityFor, formatCount } from "@/lib/activity";
 import { Reveal } from "@/app/components/reveal";
-import { AiBadge } from "@/app/components/ai-badge";
 import { SectionLabel } from "@/app/components/section-label";
+import { ScreenFrame } from "@/app/components/screen-frame";
+import { CommitStrip } from "@/app/components/commit-strip";
 
 export const metadata: Metadata = {
   title: "Platform · Doug Kvamme",
@@ -12,55 +15,81 @@ export const metadata: Metadata = {
 };
 
 export default function PlatformPage() {
+  const governance = shotsFor("hq").find((s) => s.src.endsWith("03-ai-governance.webp"));
+  const act = activityFor("platform");
+
   return (
     <>
-      <section className="hero-gradient">
-        <div className="mx-auto max-w-6xl px-6 pb-14 pt-20 sm:pt-28">
-          <div className="max-w-3xl">
-            <span className="text-xs font-semibold uppercase tracking-widest text-accent">Platform</span>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              The part nobody sees, so everything else can be trusted
+      <section>
+        <div className="mx-auto grid max-w-[1200px] gap-10 px-4 pb-14 pt-14 md:px-8 md:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-end">
+          <div>
+            <h1 className="max-w-[20ch] text-[clamp(2.25rem,5vw,4rem)] font-extrabold leading-[1] tracking-[-0.03em] text-ink">
+              The part nobody sees, so everything else can be trusted.
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted">
+            <p className="mt-8 max-w-[62ch] text-lg leading-relaxed text-ink-2">
               Ten apps built by one person only work if the boring layer is solid. Every model call goes through one
               governed gateway, every database is backed up and drill-tested, every push is graded by risk, and the
               production forecast is graded by a service that can&apos;t be talked into a better score.
             </p>
           </div>
+          <figure className="rounded-[14px] border border-rule bg-panel p-5">
+            <figcaption className="flex items-baseline justify-between gap-3">
+              <span className="data text-ink-2">Platform repos, per week</span>
+              <span className="data text-ink">{formatCount(act.total)}</span>
+            </figcaption>
+            <CommitStrip weeks={act.weeks} peak={Math.max(...act.weeks)} height={64} className="mt-4 h-16 w-full" />
+            <p className="data mt-3 text-ink-2">11 repos, commits since Apr 1</p>
+          </figure>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <SectionLabel>Ten pieces, one fleet</SectionLabel>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {platform.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 4) * 60}>
-              <article className="h-full rounded-xl border border-border bg-card p-6">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-widest text-muted">{p.kind}</span>
-                    <h2 className="mt-1 font-display text-xl font-bold text-foreground">{p.title}</h2>
+      <div className="mx-auto max-w-[1200px] px-4 pb-24 md:px-8">
+        {governance && (
+          <Reveal>
+            <figure>
+              <ScreenFrame domain="hq.kingside.app/ai-governance" right="figures scrambled">
+                <Image src={governance.src} alt={governance.caption} width={governance.w} height={governance.h} className="w-full" sizes="(max-width: 1200px) 100vw, 1136px" />
+              </ScreenFrame>
+              <figcaption className="mt-4 max-w-[70ch] text-sm leading-relaxed text-ink-2">
+                <span className="data mr-2 text-signal">Fig. 1</span>
+                {governance.caption}
+              </figcaption>
+            </figure>
+          </Reveal>
+        )}
+
+        <section className="pt-16">
+          <Reveal>
+            <SectionLabel>Ten pieces, one fleet</SectionLabel>
+            <ul className="mt-6 grid md:grid-cols-2 md:gap-x-12">
+              {platform.map((p) => (
+                <li key={p.title} className="border-b border-rule py-6">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <h3 className="text-lg font-bold tracking-[-0.01em] text-ink">{p.title}</h3>
+                    <span className="data shrink-0 text-ink-2">
+                      {p.kind}
+                      {p.ai ? " · AI" : ""}
+                    </span>
                   </div>
-                  {p.ai && <AiBadge />}
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{p.body}</p>
-                <ul className="mt-4 space-y-1.5">
-                  {p.points.map((pt) => (
-                    <li key={pt} className="flex gap-2 text-sm text-foreground/90">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-                {p.title === "Forecast eval harness" && (
-                  <Link href="/projects/cash-forecast-eval" className="mt-5 inline-flex text-sm font-semibold text-accent hover:underline">
-                    Read the case study
-                  </Link>
-                )}
-              </article>
-            </Reveal>
-          ))}
-        </div>
+                  <p className="mt-2 leading-relaxed text-ink-2">{p.body}</p>
+                  <ul className="mt-3 space-y-1.5">
+                    {p.points.map((pt) => (
+                      <li key={pt} className="flex gap-2.5 text-sm text-ink">
+                        <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-signal-bright" aria-hidden="true" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                  {p.title === "Forecast eval harness" && (
+                    <Link href="/projects/cash-forecast-eval" className="mt-4 inline-flex min-h-11 items-center font-semibold text-ink link-underline">
+                      Read the case study
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </section>
       </div>
     </>
   );

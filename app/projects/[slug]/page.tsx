@@ -6,6 +6,8 @@ import { Reveal } from "@/app/components/reveal";
 import { Gallery } from "@/app/components/gallery";
 import { SectionLabel } from "@/app/components/section-label";
 import { AiBadge } from "@/app/components/ai-badge";
+import { CommitStrip } from "@/app/components/commit-strip";
+import { activityFor, formatCount } from "@/lib/activity";
 
 export function generateStaticParams() {
   return apps.map((a) => ({ slug: a.slug }));
@@ -27,13 +29,14 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
   const i = apps.findIndex((a) => a.slug === slug);
   const prev = apps[(i - 1 + apps.length) % apps.length];
   const next = apps[(i + 1) % apps.length];
+  const act = activityFor(app.slug);
   const aiCount = app.features.filter((f) => f.ai).length;
 
   return (
     <>
-      <section className="hero-gradient">
-        <div className="mx-auto max-w-6xl px-6 pb-12 pt-14 sm:pt-20">
-          <Link href="/#system" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent">
+      <section>
+        <div className="mx-auto max-w-[1200px] px-4 md:px-8 pb-12 pt-14 sm:pt-20">
+          <Link href="/#apps" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -42,12 +45,12 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
 
           <div className="mt-8 max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+              <span className="data text-signal">
                 {layers[app.layer].label} · {app.role}
               </span>
               {aiCount > 0 && <AiBadge label={`${aiCount} AI feature area${aiCount > 1 ? "s" : ""}`} />}
             </div>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">{app.name}</h1>
+            <h1 className="mt-3 max-w-[22ch] text-[clamp(2.25rem,5vw,4rem)] font-extrabold leading-[1] tracking-[-0.03em] text-ink">{app.name}</h1>
             <p className="mt-4 text-lg leading-relaxed text-muted sm:text-xl">{app.tagline}</p>
             <p className="mt-4 text-sm text-muted">
               <span className="font-semibold text-foreground">Used by: </span>
@@ -55,18 +58,31 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {app.stats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-border bg-card px-4 py-4">
-                <div className="font-display text-2xl font-bold text-foreground">{s.value}</div>
-                <div className="mt-1 text-[11px] font-medium uppercase tracking-widest text-muted">{s.label}</div>
+          <div className="mt-10 overflow-hidden rounded-[14px] border border-rule bg-panel lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+            <div className="border-b border-rule p-4 sm:p-5 lg:border-b-0 lg:border-r">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <span className="data text-ink-2">Commits per week, last 26 weeks</span>
+                <span className="data text-ink">{formatCount(act.total)} since Apr 1</span>
               </div>
-            ))}
+              <CommitStrip weeks={act.weeks} height={56} className="mt-4 h-14 w-full" />
+            </div>
+            <dl className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2">
+              {app.stats.map((s, idx) => (
+                <div
+                  key={s.label}
+                  className={`border-rule px-4 py-4 sm:px-5 ${idx % 2 ? "border-l" : ""} ${idx > 1 ? "border-t sm:border-t-0 lg:border-t" : ""} ${idx === 2 ? "sm:border-l lg:border-l-0" : ""}`}
+                >
+                  <dt className="sr-only">{s.label}</dt>
+                  <dd className="text-2xl font-extrabold tracking-[-0.02em] text-ink">{s.value}</dd>
+                  <dd className="mt-0.5 text-sm text-ink-2">{s.label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1200px] px-4 md:px-8">
         {shots.length > 0 && (
           <section className="py-14">
             <Reveal>
@@ -93,7 +109,7 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
             <ol className="mt-6 space-y-4 border-l border-border pl-5">
               {app.recent.map((r) => (
                 <li key={r.date + r.text} className="relative">
-                  <span className="absolute -left-[25px] top-1.5 h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
+                  <span className="absolute -left-[25px] top-1.5 h-2 w-2 rounded-full bg-signal-bright" aria-hidden="true" />
                   <span className="font-mono text-xs text-accent">{r.date}</span>
                   <p className="mt-0.5 text-sm leading-relaxed text-foreground">{r.text}</p>
                 </li>
@@ -106,18 +122,18 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
           <Reveal>
             <SectionLabel>Feature map</SectionLabel>
           </Reveal>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
             {app.features.map((f, idx) => (
               <Reveal key={f.title} delay={idx * 50}>
-                <div className="h-full rounded-xl border border-border bg-card p-5">
+                <div className="h-full border-t border-rule py-5">
                   <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-display text-lg font-semibold text-foreground">{f.title}</h3>
+                    <h3 className="font-bold text-ink">{f.title}</h3>
                     {f.ai && <AiBadge />}
                   </div>
                   <ul className="mt-3 space-y-2">
                     {f.items.map((it) => (
                       <li key={it} className="flex gap-2 text-sm leading-relaxed text-muted">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" aria-hidden="true" />
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-signal-bright" aria-hidden="true" />
                         {it}
                       </li>
                     ))}
@@ -135,12 +151,12 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
 
         <nav className="mb-20 flex items-center justify-between gap-4 border-t border-border pt-10" aria-label="More apps">
           <Link href={`/projects/${prev.slug}`} className="group text-sm text-muted hover:text-foreground">
-            <span className="block text-xs uppercase tracking-widest">Previous</span>
-            <span className="font-semibold text-foreground group-hover:text-accent">{prev.name}</span>
+            <span className="block data">Previous</span>
+            <span className="font-semibold text-foreground group-hover:text-ink">{prev.name}</span>
           </Link>
           <Link href={`/projects/${next.slug}`} className="group text-right text-sm text-muted hover:text-foreground">
-            <span className="block text-xs uppercase tracking-widest">Next</span>
-            <span className="font-semibold text-foreground group-hover:text-accent">{next.name}</span>
+            <span className="block data">Next</span>
+            <span className="font-semibold text-foreground group-hover:text-ink">{next.name}</span>
           </Link>
         </nav>
       </div>

@@ -1,269 +1,244 @@
 import Link from "next/link";
-import Image from "next/image";
-import { apps, appsIn, fleet, layers, platform, shotsFor, type Layer } from "@/lib/system";
+import { apps, fleet, platform, shotsFor } from "@/lib/system";
+import { cases, bucketMeta, type Bucket } from "@/lib/method";
+import { formatCount, totalCommits } from "@/lib/activity";
 import { Reveal } from "./components/reveal";
-import { BrowserFrame } from "./components/browser-frame";
-import { AiBadge } from "./components/ai-badge";
-import { SectionLabel } from "./components/section-label";
+import { SystemBoard } from "./components/system-board";
+import { ScreenViewer, type ViewerApp } from "./components/screen-viewer";
+import { EvalLadder } from "./components/eval-ladder";
 
-const stats = [
-  { value: String(fleet.apps), label: "Production apps" },
-  { value: fleet.commits, label: "Commits since April" },
-  { value: fleet.apiRoutes, label: "API routes" },
-  { value: fleet.tests, label: "Test files" },
-];
+const EMAIL = "dougkvamme@gmail.com";
+const showcase = ["opshub", "hiring", "franchise", "tutors", "hq", "family", "school", "classroom", "sign", "studio"];
 
-const showcase = ["opshub", "hiring", "franchise", "tutors", "family", "hq"];
+const bucketStyle: Record<Bucket, string> = {
+  delete: "text-ink-2 line-through decoration-ink-3",
+  code: "text-ink",
+  agent: "text-signal",
+  human: "text-ink",
+};
 
-function firstShot(slug: string) {
-  return shotsFor(slug)[0];
+function Arrow() {
+  return (
+    <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M3 10a1 1 0 011-1h9.6l-3.3-3.3a1 1 0 111.4-1.4l5 5a1 1 0 010 1.4l-5 5a1 1 0 01-1.4-1.4l3.3-3.3H4a1 1 0 01-1-1z" />
+    </svg>
+  );
 }
 
 export default function Home() {
-  const hero = ["opshub", "hiring", "family"].map((s) => ({ slug: s, shot: firstShot(s) })).filter((h) => h.shot);
+  const viewer: ViewerApp[] = showcase.flatMap((slug) => {
+    const a = apps.find((x) => x.slug === slug);
+    const shots = shotsFor(slug);
+    if (!a || !shots.length) return [];
+    return [
+      {
+        slug,
+        name: a.name,
+        role: a.role,
+        domain: a.domain,
+        tagline: a.tagline,
+        features: a.features.slice(0, 3).map((f) => ({ title: f.title, item: f.items[0], ai: f.ai })),
+        shot: shots[0],
+        shotCount: shots.length,
+      },
+    ];
+  });
+  const teardown = cases[0];
 
   return (
     <>
-      <section className="hero-gradient relative overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-20 pt-20 sm:pb-24 sm:pt-24 lg:grid-cols-[1fr_1.05fr]">
-          <div>
-            <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium tracking-wide text-accent">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-              Open to forward deployed AI roles
-            </span>
-            <h1 className="animate-fade-up delay-100 mt-7 font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
-              Doug Kvamme
-            </h1>
-            <p className="animate-fade-up delay-200 mt-3 font-display text-xl text-accent sm:text-2xl">Forward Deployed AI Engineer</p>
-            <p className="animate-fade-up delay-300 mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              I built a company&apos;s whole operating system as a solo engineer: ten production apps for staff, tutors,
-              families, schools, and franchise owners, plus the AI, data, and reliability platform underneath. Every
-              app replaced a workflow that used to live in spreadsheets, inboxes, or someone&apos;s head.
-            </p>
-            <div className="animate-fade-up delay-400 mt-9 flex flex-wrap gap-3">
-              <Link href="#system" className="group inline-flex items-center gap-2.5 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20">
-                Explore the system
-                <svg className="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </Link>
-              <Link href="/method" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card">
-                How I work
-              </Link>
-              <a href="https://linkedin.com/in/dougkvamme" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card">
-                LinkedIn
-              </a>
-            </div>
+      {/* First viewport: thesis left, the running system right. */}
+      <section className="mx-auto grid max-w-[1200px] gap-12 px-4 pb-20 pt-10 md:px-8 md:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,33rem)] lg:items-center lg:gap-16 lg:pb-28 lg:pt-12">
+        <div>
+          <p className="flex items-center gap-2.5 text-sm font-medium text-ink-2">
+            <span className="beacon h-2 w-2 rounded-full bg-signal-bright" aria-hidden="true" />
+            Open to forward deployed AI roles
+          </p>
+          <h1 className="mt-6 text-[clamp(2.6rem,5.6vw,4.75rem)] font-extrabold leading-[0.95] tracking-[-0.035em] text-ink">
+            I built the operating system a company runs&nbsp;on.
+          </h1>
+          <p className="mt-6 max-w-[54ch] text-lg leading-relaxed text-ink-2">
+            I&apos;m Doug Kvamme, a forward deployed AI engineer. As the only engineer, I shipped ten production apps for
+            staff, tutors, families, schools, and franchise owners, plus the AI, data, and reliability platform under
+            them. Each one replaced a workflow that lived in spreadsheets, inboxes, or someone&apos;s head.
+          </p>
+          <div className="animate-rise delay-300 mt-9 flex flex-wrap gap-3">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="inline-flex min-h-12 items-center gap-2.5 rounded-lg bg-ink px-5 font-semibold text-panel transition-colors hover:bg-field"
+            >
+              Email me
+              <Arrow />
+            </a>
+            <Link
+              href="#apps"
+              className="inline-flex min-h-12 items-center rounded-lg border border-rule-strong bg-panel px-5 font-semibold text-ink transition-colors hover:border-ink"
+            >
+              See the apps
+            </Link>
           </div>
+        </div>
 
-          {hero.length > 0 && (
-            <Reveal delay={200} className="relative hidden h-[440px] lg:block">
-              {hero.map((h, i) => (
-                <Link
-                  key={h.slug}
-                  href={`/projects/${h.slug}`}
-                  className="absolute block w-[88%] transition-transform duration-500 hover:z-30 hover:-translate-y-2"
-                  style={{ top: `${i * 70}px`, left: `${i * 6}%`, zIndex: 10 + i }}
-                  aria-label={`Open ${apps.find((a) => a.slug === h.slug)?.name}`}
-                >
-                  <BrowserFrame url={apps.find((a) => a.slug === h.slug)?.domain}>
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <Image src={h.shot!.src} alt={h.shot!.caption} fill className="object-cover object-top" sizes="40vw" priority={i === 0} />
-                    </div>
-                  </BrowserFrame>
-                </Link>
-              ))}
-            </Reveal>
-          )}
+        <div>
+          <SystemBoard />
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 px-6 sm:grid-cols-4 sm:divide-x sm:divide-border">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 80}>
-              <div className="px-4 py-9 text-center">
-                <div className="font-display text-3xl font-bold text-accent sm:text-4xl">{s.value}</div>
-                <div className="mt-2 text-xs font-medium uppercase tracking-widest text-muted">{s.label}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <div className="mx-auto max-w-6xl px-6">
-        <section id="system" className="scroll-mt-24 py-20">
+      {/* Inside the apps */}
+      <section id="apps" className="scroll-mt-20 border-t border-rule bg-panel">
+        <div className="mx-auto max-w-[1200px] px-4 py-20 md:px-8 md:py-28">
           <Reveal>
-            <SectionLabel>The system</SectionLabel>
-            <h2 className="mt-6 max-w-3xl font-display text-3xl font-bold text-foreground sm:text-4xl">
-              One operating system, four layers
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-end">
+              <h2 className="max-w-[16ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-bold leading-[1.05] tracking-[-0.025em] text-ink">
+                Real screens from the apps people use every day.
+              </h2>
+              <p className="text-ink-2">
+                Shown as Kingside Learning, a fictional brand. Record screens come from a sandbox market and company
+                figures are scrambled, so no real customer, tutor, or financial data appears.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal className="mt-12">
+            <ScreenViewer items={viewer} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* The referee: the one drenched band. */}
+      <section id="eval" className="scroll-mt-16 bg-field text-field-ink">
+        <div className="mx-auto grid max-w-[1200px] gap-14 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)] lg:items-center">
+          <Reveal>
+            <p className="data text-signal-bright">Evals in production</p>
+            <h2 className="mt-4 max-w-[14ch] text-[clamp(2rem,4.4vw,3.5rem)] font-extrabold leading-[1] tracking-[-0.03em]">
+              The cash forecast has a referee.
             </h2>
-            <p className="mt-4 max-w-3xl text-muted">
-              Every app shares one design system, one sign-in, one app launcher, and one platform for AI, data, and
-              reliability. Shown here as Kingside Learning; the real company is a multi-market children&apos;s education
-              business.
+            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-field-ink-2">
+              A separate service grades the production forecast every week against the money that actually landed.
+              Its first run caught a naive same-week-last-year baseline beating the model by{" "}
+              <span className="font-semibold text-field-ink">2.3x</span>. The fix shipped on evidence, and nothing changes
+              now without clearing a noise gate.
             </p>
+            <Link
+              href="/projects/cash-forecast-eval"
+              className="mt-8 inline-flex min-h-12 items-center gap-2.5 rounded-lg bg-field-ink px-5 font-semibold text-field transition-colors hover:bg-panel"
+            >
+              Read the case study
+              <Arrow />
+            </Link>
+          </Reveal>
+          <Reveal delay={120}>
+            <EvalLadder />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Method, proven on one real case. */}
+      <section className="mx-auto max-w-[1200px] px-4 py-20 md:px-8 md:py-28">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)]">
+          <Reveal>
+            <h2 className="max-w-[15ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-bold leading-[1.05] tracking-[-0.025em] text-ink">
+              Every step gets sorted before anything gets built.
+            </h2>
+            <p className="mt-5 max-w-[50ch] leading-relaxed text-ink-2">
+              I map how the work really flows, then put each step in one bucket: delete it, write plain code, hand it to
+              an agent, or keep a person on it. Most of the value comes from the first two, before any model is involved.
+            </p>
+            <dl className="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              {(Object.keys(bucketMeta) as Bucket[]).map((b) => (
+                <div key={b}>
+                  <dt className="font-semibold text-ink">{bucketMeta[b].label}</dt>
+                  <dd className="mt-0.5 text-sm text-ink-2">{bucketMeta[b].rule}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link href="/method" className="mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-ink link-underline">
+              The full method and four workflows
+              <Arrow />
+            </Link>
           </Reveal>
 
-          <div className="mt-10 space-y-8">
-            {(["operate", "grow", "serve"] as Layer[]).map((layer) => (
-              <Reveal key={layer}>
-                <div className="grid gap-4 lg:grid-cols-[13rem_1fr]">
-                  <div className="pt-1">
-                    <h3 className="font-display text-lg font-bold text-foreground">{layers[layer].label}</h3>
-                    <p className="mt-1 text-sm text-muted">{layers[layer].blurb}</p>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                    {appsIn(layer).map((a) => {
-                      const shot = firstShot(a.slug);
-                      const ai = a.features.some((f) => f.ai);
-                      return (
-                        <Link key={a.slug} href={`/projects/${a.slug}`} className="group overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-accent/40">
-                          <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-surface">
-                            {shot ? (
-                              <Image src={shot.src} alt="" fill className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width: 640px) 100vw, 25vw" />
-                            ) : (
-                              <div className="flex h-full items-center justify-center font-display text-2xl text-muted/40">{a.name}</div>
-                            )}
-                          </div>
-                          <div className="p-4">
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="font-semibold text-foreground group-hover:text-accent">{a.name}</span>
-                              {ai && <AiBadge />}
-                            </div>
-                            <p className="mt-1 text-xs text-muted">{a.role}</p>
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-
-            <Reveal>
-              <div className="grid gap-4 lg:grid-cols-[13rem_1fr]">
-                <div className="pt-1">
-                  <h3 className="font-display text-lg font-bold text-foreground">{layers.platform.label}</h3>
-                  <p className="mt-1 text-sm text-muted">{layers.platform.blurb}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-card p-5">
-                  <div className="flex flex-wrap gap-2">
-                    {platform.map((p) => (
-                      <span key={p.title} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-sm text-foreground">
-                        {p.ai && <span className="h-1.5 w-1.5 rounded-full bg-violet-500" aria-hidden="true" />}
-                        {p.title}
-                      </span>
-                    ))}
-                  </div>
-                  <Link href="/platform" className="mt-4 inline-flex text-sm font-semibold text-accent hover:underline">
-                    See the platform
-                  </Link>
-                </div>
+          <Reveal delay={120}>
+            <figure className="overflow-hidden rounded-[14px] border border-rule bg-panel">
+              <div className="flex items-center justify-between gap-3 border-b border-rule px-4 py-3">
+                <span className="font-semibold text-ink">{teardown.title}</span>
+                <span className="data text-ink-2">sorted</span>
               </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <Reveal>
-          <section id="eval" className="mb-20 scroll-mt-24 overflow-hidden rounded-2xl border border-accent/20 bg-accent/5">
-            <div className="grid gap-8 p-8 sm:p-12 lg:grid-cols-[1.3fr_1fr] lg:items-center">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-widest text-accent">Case study · Evals in production</span>
-                <h2 className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">
-                  The cash forecast has a referee
-                </h2>
-                <p className="mt-4 leading-relaxed text-muted">
-                  An independent service grades the production cash forecast every week against money that actually
-                  landed. Its first run caught a naive same-week-last-year baseline beating the model 2.3x. The fix
-                  shipped on evidence, and nothing changes now without clearing a noise gate.
-                </p>
-                <Link href="/projects/cash-forecast-eval" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-all hover:scale-[1.02]">
-                  Read the case study
-                </Link>
-              </div>
-              <dl className="grid grid-cols-2 gap-3">
-                {[
-                  ["84%", "Live accuracy, rolling 4-week"],
-                  ["92%", "Best replay candidate"],
-                  ["2.3x", "Baseline beat the first model"],
-                  ["95%", "Target"],
-                ].map(([v, l]) => (
-                  <div key={l} className="rounded-xl border border-border bg-background p-4">
-                    <dt className="sr-only">{l}</dt>
-                    <dd className="font-display text-3xl font-bold text-foreground">{v}</dd>
-                    <dd className="mt-1 text-xs text-muted">{l}</dd>
+              <ol className="divide-y divide-rule">
+                {teardown.sort.map((s) => (
+                  <li key={s.step} className="grid grid-cols-[minmax(0,1fr)_6.5rem] items-baseline gap-4 px-4 py-3">
+                    <span className={`text-sm ${bucketStyle[s.bucket]}`}>{s.step}</span>
+                    <span className={`data text-right ${s.bucket === "agent" ? "text-signal" : "text-ink-2"}`}>
+                      {bucketMeta[s.bucket].label}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <div className="grid grid-cols-2 border-t border-rule bg-paper">
+                {teardown.results.map((r, i) => (
+                  <div key={r.label} className={`px-4 py-4 ${i ? "border-l border-rule" : ""}`}>
+                    <div className="text-2xl font-extrabold tracking-[-0.02em] text-ink">{r.value}</div>
+                    <div className="mt-0.5 text-sm text-ink-2">{r.label}</div>
                   </div>
                 ))}
-              </dl>
-            </div>
-          </section>
-        </Reveal>
-
-        <section className="pb-12">
-          <Reveal>
-            <SectionLabel>Inside the apps</SectionLabel>
+              </div>
+              <figcaption className="border-t border-rule px-4 py-3 text-sm text-ink-2">{teardown.guardrail}</figcaption>
+            </figure>
           </Reveal>
-          <div className="mt-10 space-y-20">
-            {showcase.map((slug, i) => {
-              const a = apps.find((x) => x.slug === slug)!;
-              const shot = firstShot(slug);
-              return (
-                <Reveal key={slug}>
-                  <article className="grid items-center gap-10 lg:grid-cols-2">
-                    <div className={i % 2 ? "lg:order-2" : ""}>
-                      <span className="text-xs font-semibold uppercase tracking-widest text-accent">{a.role}</span>
-                      <h3 className="mt-2 font-display text-3xl font-bold text-foreground">{a.name}</h3>
-                      <p className="mt-3 leading-relaxed text-muted">{a.tagline}</p>
-                      <ul className="mt-5 space-y-2">
-                        {a.features.slice(0, 4).map((f) => (
-                          <li key={f.title} className="flex items-start gap-2 text-sm text-foreground/90">
-                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                            <span>
-                              <span className="font-semibold">{f.title}:</span> <span className="text-muted">{f.items[0]}</span>
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                      <Link href={`/projects/${slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3">
-                        Full walkthrough
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </Link>
-                    </div>
-                    {shot && (
-                      <Link href={`/projects/${slug}`} className="group block" aria-label={`${a.name} walkthrough`}>
-                        <BrowserFrame url={a.domain} className="transition-transform duration-500 group-hover:scale-[1.01]">
-                          <Image src={shot.src} alt={shot.caption} width={shot.w} height={shot.h} className="w-full" sizes="(max-width: 1024px) 100vw, 50vw" />
-                        </BrowserFrame>
-                      </Link>
-                    )}
-                  </article>
-                </Reveal>
-              );
-            })}
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <Reveal>
-          <section className="mb-20 mt-12 rounded-2xl border border-border bg-card p-10 text-center sm:p-12">
-            <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">Want this inside your company?</h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted">
-              I map how the work really flows, decide what should be code, agents, or people, and ship it inside the
-              tools your team already uses.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <a href="mailto:dougkvamme@gmail.com" className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02]">
-                Get in touch
-              </a>
-              <Link href="/method" className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/30">
-                Read the method
-              </Link>
+      {/* The platform underneath, as a spec sheet. */}
+      <section className="border-t border-rule bg-panel">
+        <div className="mx-auto max-w-[1200px] px-4 py-20 md:px-8 md:py-28">
+          <Reveal>
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-end">
+              <h2 className="max-w-[17ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-bold leading-[1.05] tracking-[-0.025em] text-ink">
+                The layer underneath, so one person can run all of it.
+              </h2>
+              <p className="text-ink-2">
+                Every model call goes through one governed gateway, every database is backed up and drill-tested, and
+                every push is graded by risk before it ships.
+              </p>
             </div>
-          </section>
-        </Reveal>
-      </div>
+          </Reveal>
+          <Reveal className="mt-12">
+            <ul className="grid border-t border-rule md:grid-cols-2 md:gap-x-12">
+              {platform.map((p) => (
+                <li key={p.title} className="border-b border-rule py-5">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <h3 className="font-semibold text-ink">{p.title}</h3>
+                    <span className="data shrink-0 text-ink-2">
+                      {p.kind}
+                      {p.ai ? " · AI" : ""}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-2">{p.body}</p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <dl className="flex flex-wrap gap-x-8 gap-y-3">
+              {[
+                [formatCount(totalCommits), "commits since April"],
+                [fleet.apiRoutes, "API routes"],
+                [fleet.tests, "test files"],
+                [fleet.models, "data models"],
+              ].map(([v, l]) => (
+                <div key={l} className="flex items-baseline gap-2">
+                  <dt className="sr-only">{l}</dt>
+                  <dd className="data text-ink">{v}</dd>
+                  <dd className="text-sm text-ink-2">{l}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link href="/platform" className="inline-flex min-h-11 items-center gap-2 font-semibold text-ink link-underline">
+              How the platform works
+              <Arrow />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
