@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+shots-raw/
+.playwright-cli/
+scripts/capture/
+scripts/anonymize.js

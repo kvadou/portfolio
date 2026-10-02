@@ -1,0 +1,298 @@
+{
+  "family": [
+    {
+      "file": "01-journey.webp",
+      "caption": "Parent view of a child chess-band journey: colour-coded band chapters from trial to Navy with lesson progress.",
+      "w": 1512,
+      "h": 895
+    },
+    {
+      "file": "02-billing.webp",
+      "caption": "Parent billing portal: balance, prepaid credit, term prepayments, payment method and invoices in one page.",
+      "w": 1512,
+      "h": 895
+    }
+  ],
+  "franchise": [
+    {
+      "file": "02-launch-progress.webp",
+      "caption": "Launch Progress tracker: one row per owner with step progress, last completed step, highest step reached, last-active recency and skipped-step flags for the Kingside Launch onboarding program.",
+      "w": 2162,
+      "h": 1164
+    },
+    {
+      "file": "03-help-desk.webp",
+      "caption": "Franchise Help Desk: ticketing with triage, ownership, waiting-on-market states, urgency, due dates and per-assignee queues.",
+      "w": 2162,
+      "h": 1164
+    },
+    {
+      "file": "04-competitive-intel.webp",
+      "caption": "Competitive Intel: dot-plot benchmarking of the brand franchise fee, total investment and royalty against other franchisors disclosure documents, with figure-verification coverage.",
+      "w": 2162,
+      "h": 1164
+    }
+  ],
+  "hiring": [
+    {
+      "file": "01-application-detail.webp",
+      "caption": "Kingside Hiring candidate record: stage accordion, scorecards, offer and activity tabs plus a contact and details side panel, all on the fictional Chesslandia market.",
+      "w": 1296,
+      "h": 735
+    },
+    {
+      "file": "02-offer-checklist.webp",
+      "caption": "Offer tab with a five-step hire checklist (offer, agreement, signature, background check, tutor account) showing a fully onboarded candidate.",
+      "w": 1296,
+      "h": 735
+    },
+    {
+      "file": "03-practice-board.webp",
+      "caption": "Staff-only practice job board where a fictional posting can be applied to and followed through interviews, offer and onboarding with no real email sent.",
+      "w": 1296,
+      "h": 650
+    },
+    {
+      "file": "04-settings-home.webp",
+      "caption": "Searchable settings home (\"What do you want to change?\") with quick-search chips and grouped personal and organization settings.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "05-interview-kits.webp",
+      "caption": "Job setup wizard (four phases with progress ring) on the Interview Kits step: phone-screen and video-audition kits with prep items and scorecard attributes.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "06-candidates-table.webp",
+      "caption": "Searchable, filterable candidates table for a job with avatars, stages and export, 45 fictional candidates.",
+      "w": 1296,
+      "h": 735
+    },
+    {
+      "file": "07-dashboard.webp",
+      "caption": "Hiring dashboard for the fictional Chesslandia market: KPI tiles (jobs, applications, scorecards, time to hire, conversion) and an Attention Required queue of stuck candidates by stage.",
+      "w": 1296,
+      "h": 767
+    }
+  ],
+  "hq": [
+    {
+      "file": "03-ai-governance.webp",
+      "caption": "AI Governance: model-gateway spend, tokens, requests and models used, with spend-over-time, spend-by-model and a per-key / per-agent usage table.",
+      "w": 2162,
+      "h": 1164
+    },
+    {
+      "file": "04-product-usage.webp",
+      "caption": "Product Usage: per-app active users by role, page views, guide reads and helpfulness, top routes and guide-article performance, read from each app's own usage table.",
+      "w": 2162,
+      "h": 1164
+    },
+    {
+      "file": "05-traction-scorecard.webp",
+      "caption": "EOS Scorecard: nine weekly measurables with named owners, thirteen weeks of trailing data and green/red target coloring for a one-glance weekly pulse.",
+      "w": 2162,
+      "h": 1164
+    }
+  ],
+  "opshub": [
+    {
+      "file": "01-cct-outcome.webp",
+      "caption": "Client Conversion tracker for Kingside Learning: won clients with stage, lead source, tutor pairing and conversion reason in one filterable table.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "02-booking-hub.webp",
+      "caption": "Booking Hub: evergreen public booking forms with QR codes, printable flyers, labels per market and active/trial filters, all managed from one screen.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "03-client-detail.webp",
+      "caption": "Client 360 view: profile, activity, communications, tutor reviews, accounting, billing and cancellations tabs, with every job the family has running and its status.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "04-tutor-schedule.webp",
+      "caption": "Tutor profile with Schedule tab: upcoming lessons, lessons needing completion, reports owed and cancellation rate, plus tabs for quality, comms, accounting and development.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "05-lessons.webp",
+      "caption": "Lessons ledger: every upcoming, completed, cancelled and needs-completion lesson in one searchable, filterable, exportable table with client, students, tutor and job.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "06-job-builder.webp",
+      "caption": "Job Builder wizard: pick a pre-configured template (clubs, camps, pickups) then fill details and confirm, so new programs launch in three guided steps.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "07-raised-invoices.webp",
+      "caption": "Accounting: raised invoices filterable by paid, unpaid, pending and void with a live totals panel (count, gross, net, tax, still to pay) and CSV exports.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "08-marketing-hub.webp",
+      "caption": "Growth hub for franchise markets: brand kit, graphics, photography, Canva templates and merch ordering, with a guided three-step launch checklist for a new market.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "09-guide.webp",
+      "caption": "In-app Guide: searchable how-to library organised by area (scheduling, CCT, accounting, billing, payments) with article counts, so non-technical staff self-serve.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "12-forecast-accuracy.webp",
+      "caption": "Forecast Accuracy panel: every completed week compares predicted vs actual bank deposits with per-week accuracy and bias badges, plus weekday-fit, bias and weekly error summary chips.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "13-eval-harness.webp",
+      "caption": "Cash forecast Eval harness: an independent weekly grader scores forecast accuracy, bias and a rule-of-thumb baseline, and replays challenger tunings so the model improves week over week.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "14-ask-analyst.webp",
+      "caption": "Ask the Analyst: plain-English question answered with a live chart of weekly client invoice collections, with chat history, query inspection and suggested follow-ups.",
+      "w": 2160,
+      "h": 1278
+    }
+  ],
+  "cash-forecast-eval": [
+    {
+      "file": "12-forecast-accuracy.webp",
+      "caption": "Forecast Accuracy panel: every completed week compares predicted vs actual bank deposits with per-week accuracy and bias badges, plus weekday-fit, bias and weekly error summary chips.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "13-eval-harness.webp",
+      "caption": "Cash forecast Eval harness: an independent weekly grader scores forecast accuracy, bias and a rule-of-thumb baseline, and replays challenger tunings so the model improves week over week.",
+      "w": 2160,
+      "h": 1278
+    }
+  ],
+  "school": [
+    {
+      "file": "01-dashboard.webp",
+      "caption": "School admin dashboard: class, student and lesson counts, next-term agreement status, recent lessons and invoices at a glance.",
+      "w": 1512,
+      "h": 895
+    },
+    {
+      "file": "02-classes.webp",
+      "caption": "Class cards per school program showing instructors, enrolled students, lessons delivered and next session.",
+      "w": 1512,
+      "h": 895
+    },
+    {
+      "file": "03-roster.webp",
+      "caption": "Sortable searchable student roster with attendance counts, last attended and one-click roster confirmation and export.",
+      "w": 1512,
+      "h": 895
+    },
+    {
+      "file": "04-impact.webp",
+      "caption": "Principal-ready program impact report with lessons delivered, students, terms run and a rebooking call to action.",
+      "w": 1512,
+      "h": 895
+    }
+  ],
+  "sign": [
+    {
+      "file": "01-documents-list.webp",
+      "caption": "Documents admin table for the Chesslandia team: status chips, visibility, signers and filters/export across 14 documents.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "02-audit-trail.webp",
+      "caption": "Document audit trail event timeline: created, signer emails sent, sent, each with timestamp and hash disclosure for a tamper-evident chain.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "03-template-field-editor.webp",
+      "caption": "Template field editor over a PDF with auto-fill merge fields (candidate, market, job title) placed on the page, plus fields/signers/properties dock.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "04-send-flow.webp",
+      "caption": "Guided send flow: step 1 of 2, add signers and agreement details that are merged into the PDF before a signing link is issued (not sent).",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "06-templates-list.webp",
+      "caption": "Template library with status, visibility scope (team/organization), field counts, usage counts and one-click Send/Edit.",
+      "w": 1296,
+      "h": 767
+    }
+  ],
+  "studio": [
+    {
+      "file": "01-chat-citations.webp",
+      "caption": "Curriculum assistant answering a teaching question with structured sections and clickable module/lesson citations, plus conversation history and Story Mode.",
+      "w": 1296,
+      "h": 690
+    },
+    {
+      "file": "02-curriculum-lessons.webp",
+      "caption": "Curriculum browser: 93 lessons grouped by module with per-lesson illustration counts, search and concept filter.",
+      "w": 1296,
+      "h": 767
+    },
+    {
+      "file": "03-generator.webp",
+      "caption": "Curriculum generator with saved templates (tactical training, opening explorer, knight adventure), age bands and single/batch modes (nothing generated).",
+      "w": 1296,
+      "h": 690
+    },
+    {
+      "file": "04-canon-gaps.webp",
+      "caption": "Admin canon-gap scanner: flags invented names across 93 lessons against 51 characters and 20 landmarks, with one-click create or dismiss.",
+      "w": 1296,
+      "h": 735
+    },
+    {
+      "file": "05-ai-pipeline-health.webp",
+      "caption": "AI pipeline health admin: 1,506 embedded curriculum chunks, 950 illustrations, 51 characters and canon readiness, shown as status-dotted metric tiles.",
+      "w": 1296,
+      "h": 735
+    }
+  ],
+  "tutors": [
+    {
+      "file": "01-tutors-roster.webp",
+      "caption": "Kingside Tutors admin roster for a market: status tabs, filters, bulk email and CSV export over a searchable tutor table.",
+      "w": 2160,
+      "h": 1278
+    },
+    {
+      "file": "02-cohort-tracker.webp",
+      "caption": "Onboarding cohort training tracker with ATS link, cert debrief scheduling, reminder cadence and per-tutor readiness grid.",
+      "w": 1512,
+      "h": 895
+    },
+    {
+      "file": "04-guide.webp",
+      "caption": "In-app tutor guide with illustrated hero and instant search across lessons, printables and tutor profiles.",
+      "w": 1512,
+      "h": 895
+    }
+  ]
+}

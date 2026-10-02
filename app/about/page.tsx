@@ -3,9 +3,9 @@ import { TechBadge } from "@/app/components/tech-badge";
 import { Reveal } from "@/app/components/reveal";
 
 export const metadata: Metadata = {
-  title: "About — Doug Kvamme",
+  title: "About · Doug Kvamme",
   description:
-    "Forward deployed AI engineer: maps real business processes, re-engineers them around agents, and ships 5 production systems for a $3M education company as sole developer.",
+    "Forward deployed AI engineer: maps real business processes, re-engineers them around agents, and ships ten production apps and their AI platform for a $3M education company as its only engineer.",
 };
 
 const skills = {
@@ -62,7 +62,7 @@ const experience = [
   {
     title: "Full-stack ownership",
     description:
-      "Database design, API architecture, auth, real-time features, AI integration, and responsive frontends — all in one person.",
+      "Database design, API architecture, auth, real-time features, AI integration, and responsive frontends, all in one person.",
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L12 12.75 6.429 9.75m11.142 0l4.179 2.25L12 17.25 2.25 12l4.179-2.25m11.142 0L21.75 12l-9.75 5.25L2.25 12" />
@@ -96,11 +96,16 @@ export default function AboutPage() {
             </h1>
             <div className="mt-8 space-y-5 text-lg leading-relaxed text-muted">
               <p>
-                I&apos;m an AI engineer and full-stack developer. As the sole
-                developer at a $3M education company, I&apos;ve designed, built,
-                and shipped 5 applications in production — including RAG pipelines,
-                pgvector candidate matching, and LLM-assisted workflows that real
-                teams rely on every day.
+                I&apos;m a forward deployed AI engineer. As the only engineer at a
+                $3M multi-market education company, I designed and shipped its
+                whole operating system: ten production apps for staff, tutors,
+                families, schools, and franchise owners, plus the model gateway,
+                eval harness, warehouse, and reliability layer underneath.
+              </p>
+              <p>
+                Before that I spent a decade recruiting engineers at Meta, Nerdery,
+                and Robert Half, which is where I learned how work actually gets done
+                inside a company. That is still the first thing I look at.
               </p>
               <p>
                 I work end to end: database design, API architecture, auth, vector

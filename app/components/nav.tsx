@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useTheme } from "@/lib/theme";
 import { useState, useEffect } from "react";
-import { projects } from "@/lib/projects";
+import { apps as projects } from "@/lib/system";
 
 export function Nav() {
   const { theme, toggle } = useTheme();
@@ -49,7 +49,7 @@ export function Nav() {
             onMouseLeave={() => setProjectsOpen(false)}
           >
             <button className="link-underline rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-foreground">
-              Projects
+              Apps
             </button>
             {projectsOpen && (
               <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2">
@@ -62,13 +62,19 @@ export function Nav() {
                       onClick={() => setProjectsOpen(false)}
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-accent/50" />
-                      {p.title}
+                      {p.name}
                     </Link>
                   ))}
                 </div>
               </div>
             )}
           </div>
+          <Link
+            href="/platform"
+            className="link-underline rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            Platform
+          </Link>
           <Link
             href="/method"
             className="link-underline rounded-md px-3 py-2 text-sm text-muted transition-colors hover:text-foreground"
@@ -144,7 +150,7 @@ export function Nav() {
           </Link>
           <div className="py-2">
             <span className="text-xs font-medium uppercase tracking-widest text-accent">
-              Projects
+              Apps
             </span>
             {projects.map((p) => (
               <Link
@@ -153,10 +159,17 @@ export function Nav() {
                 className="block py-2 pl-3 text-sm text-muted transition-colors hover:text-foreground"
                 onClick={() => setMobileOpen(false)}
               >
-                {p.title}
+                {p.name}
               </Link>
             ))}
           </div>
+          <Link
+            href="/platform"
+            className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"
+            onClick={() => setMobileOpen(false)}
+          >
+            Platform
+          </Link>
           <Link
             href="/method"
             className="block py-2.5 text-sm text-muted transition-colors hover:text-foreground"

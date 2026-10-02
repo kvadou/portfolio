@@ -1,272 +1,265 @@
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/projects";
-import { TechBadge } from "./components/tech-badge";
+import { apps, appsIn, fleet, layers, platform, shotsFor, type Layer } from "@/lib/system";
 import { Reveal } from "./components/reveal";
 import { BrowserFrame } from "./components/browser-frame";
+import { AiBadge } from "./components/ai-badge";
+import { SectionLabel } from "./components/section-label";
 
 const stats = [
-  { value: "5", label: "Apps in Production" },
-  { value: "4", label: "Shipped AI Features" },
-  { value: "$10K/mo", label: "Spend Cut" },
-  { value: "$54K+", label: "SaaS Replaced" },
+  { value: String(fleet.apps), label: "Production apps" },
+  { value: fleet.commits, label: "Commits since April" },
+  { value: fleet.apiRoutes, label: "API routes" },
+  { value: fleet.tests, label: "Test files" },
 ];
 
+const showcase = ["opshub", "hiring", "franchise", "tutors", "family", "hq"];
+
+function firstShot(slug: string) {
+  return shotsFor(slug)[0];
+}
+
 export default function Home() {
-  const featured = projects[0];
-  const rest = projects.slice(1);
+  const hero = ["opshub", "hiring", "family"].map((s) => ({ slug: s, shot: firstShot(s) })).filter((h) => h.shot);
 
   return (
     <>
-      {/* Hero */}
       <section className="hero-gradient relative overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-20 pt-20 sm:pb-28 sm:pt-28 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-20 pt-20 sm:pb-24 sm:pt-24 lg:grid-cols-[1fr_1.05fr]">
           <div>
-            <div className="animate-fade-up">
-              <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium tracking-wide text-accent">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-                Open to forward deployed AI roles
-              </span>
-            </div>
-            <h1 className="animate-fade-up delay-100 mt-7 font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium tracking-wide text-accent">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+              Open to forward deployed AI roles
+            </span>
+            <h1 className="animate-fade-up delay-100 mt-7 font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
               Doug Kvamme
             </h1>
-            <p className="animate-fade-up delay-200 mt-3 font-display text-xl text-accent sm:text-2xl">
-              Forward Deployed AI Engineer
-            </p>
+            <p className="animate-fade-up delay-200 mt-3 font-display text-xl text-accent sm:text-2xl">Forward Deployed AI Engineer</p>
             <p className="animate-fade-up delay-300 mt-6 max-w-xl text-lg leading-relaxed text-muted">
-              I map how a business actually runs, sort every step into delete,
-              code, agent, or human, then ship the agents inside the systems teams
-              already use. Five production applications, built solo, run daily
-              by non-technical operators.
+              I built a company&apos;s whole operating system as a solo engineer: ten production apps for staff, tutors,
+              families, schools, and franchise owners, plus the AI, data, and reliability platform underneath. Every
+              app replaced a workflow that used to live in spreadsheets, inboxes, or someone&apos;s head.
             </p>
             <div className="animate-fade-up delay-400 mt-9 flex flex-wrap gap-3">
-              <Link
-                href="/method"
-                className="group inline-flex items-center gap-2.5 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20"
-              >
-                How I Work
-                <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <Link href="#system" className="group inline-flex items-center gap-2.5 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20">
+                Explore the system
+                <svg className="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </Link>
-              <a
-                href="https://github.com/kvadou"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card"
-              >
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-                GitHub
-              </a>
-              <a
-                href="https://linkedin.com/in/dougkvamme"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card"
-              >
-                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
+              <Link href="/method" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card">
+                How I work
+              </Link>
+              <a href="https://linkedin.com/in/dougkvamme" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card">
                 LinkedIn
               </a>
             </div>
           </div>
 
-          {/* Hero visual — flagship app in a browser frame */}
-          <Reveal delay={200} className="hidden lg:block">
-            <Link href={`/projects/${featured.slug}`} className="group block animate-float">
-              <BrowserFrame url={featured.demoLabel} className="transition-transform duration-500 group-hover:scale-[1.015]">
-                <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  <Image
-                    src={featured.image}
-                    alt={featured.title}
-                    fill
-                    className="object-cover object-top"
-                    priority
-                    sizes="(max-width: 1024px) 0px, 45vw"
-                  />
-                </div>
-              </BrowserFrame>
-            </Link>
-          </Reveal>
+          {hero.length > 0 && (
+            <Reveal delay={200} className="relative hidden h-[440px] lg:block">
+              {hero.map((h, i) => (
+                <Link
+                  key={h.slug}
+                  href={`/projects/${h.slug}`}
+                  className="absolute block w-[88%] transition-transform duration-500 hover:z-30 hover:-translate-y-2"
+                  style={{ top: `${i * 70}px`, left: `${i * 6}%`, zIndex: 10 + i }}
+                  aria-label={`Open ${apps.find((a) => a.slug === h.slug)?.name}`}
+                >
+                  <BrowserFrame url={apps.find((a) => a.slug === h.slug)?.domain}>
+                    <div className="relative aspect-[16/9] overflow-hidden">
+                      <Image src={h.shot!.src} alt={h.shot!.caption} fill className="object-cover object-top" sizes="40vw" priority={i === 0} />
+                    </div>
+                  </BrowserFrame>
+                </Link>
+              ))}
+            </Reveal>
+          )}
         </div>
       </section>
 
-      {/* Stats Strip */}
       <section className="border-y border-border bg-surface">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-2 divide-border sm:grid-cols-4 sm:divide-x">
-            {stats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 80}>
-                <div className="px-4 py-10 text-center">
-                  <div className="font-display text-4xl font-bold text-accent sm:text-5xl">
-                    {stat.value}
-                  </div>
-                  <div className="mt-2 text-xs font-medium uppercase tracking-widest text-muted">
-                    {stat.label}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        <div className="mx-auto grid max-w-6xl grid-cols-2 px-6 sm:grid-cols-4 sm:divide-x sm:divide-border">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 80}>
+              <div className="px-4 py-9 text-center">
+                <div className="font-display text-3xl font-bold text-accent sm:text-4xl">{s.value}</div>
+                <div className="mt-2 text-xs font-medium uppercase tracking-widest text-muted">{s.label}</div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       <div className="mx-auto max-w-6xl px-6">
-        {/* Featured Project */}
-        <section className="py-20">
+        <section id="system" className="scroll-mt-24 py-20">
           <Reveal>
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-                Featured Work
-              </span>
-              <span className="h-px flex-1 bg-border" />
-            </div>
+            <SectionLabel>The system</SectionLabel>
+            <h2 className="mt-6 max-w-3xl font-display text-3xl font-bold text-foreground sm:text-4xl">
+              One operating system, four layers
+            </h2>
+            <p className="mt-4 max-w-3xl text-muted">
+              Every app shares one design system, one sign-in, one app launcher, and one platform for AI, data, and
+              reliability. Shown here as Kingside Learning; the real company is a multi-market children&apos;s education
+              business.
+            </p>
           </Reveal>
 
-          <Reveal delay={120}>
-            <Link
-              href={`/projects/${featured.slug}`}
-              className="group mt-8 grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]"
-            >
-              <div className="order-2 lg:order-1">
-                <span className="text-xs font-medium uppercase tracking-widest text-accent">
-                  {featured.category}
-                </span>
-                <h3 className="mt-3 font-display text-3xl font-bold text-foreground sm:text-4xl">
-                  {featured.title}
-                </h3>
-                <p className="mt-4 leading-relaxed text-muted">{featured.pitch}</p>
-                <div className="mt-6 flex flex-wrap gap-1.5">
-                  {featured.stack.map((tech) => (
-                    <TechBadge key={tech} name={tech} />
-                  ))}
-                </div>
-                <div className="mt-7 grid grid-cols-4 gap-3">
-                  {featured.metrics.map((m) => (
-                    <div key={m.label} className="rounded-lg border border-border bg-card px-2 py-3 text-center">
-                      <div className="font-display text-lg font-bold text-foreground">{m.value}</div>
-                      <div className="mt-0.5 text-[10px] uppercase tracking-wide text-muted">{m.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-7">
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-all group-hover:gap-3">
-                    View Case Study
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-              <div className="order-1 lg:order-2">
-                <BrowserFrame url={featured.demoLabel} className="transition-transform duration-500 group-hover:scale-[1.015]">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                    <Image
-                      src={featured.image}
-                      alt={featured.title}
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 1024px) 100vw, 55vw"
-                    />
+          <div className="mt-10 space-y-8">
+            {(["operate", "grow", "serve"] as Layer[]).map((layer) => (
+              <Reveal key={layer}>
+                <div className="grid gap-4 lg:grid-cols-[13rem_1fr]">
+                  <div className="pt-1">
+                    <h3 className="font-display text-lg font-bold text-foreground">{layers[layer].label}</h3>
+                    <p className="mt-1 text-sm text-muted">{layers[layer].blurb}</p>
                   </div>
-                </BrowserFrame>
-              </div>
-            </Link>
-          </Reveal>
-        </section>
-
-        {/* Other Projects */}
-        <section className="pb-20">
-          <Reveal>
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold uppercase tracking-widest text-accent">
-                More Projects
-              </span>
-              <span className="h-px flex-1 bg-border" />
-            </div>
-          </Reveal>
-
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            {rest.map((project, i) => (
-              <Reveal key={project.slug} delay={i * 100}>
-                <Link href={`/projects/${project.slug}`} className="group block">
-                  <BrowserFrame url={project.demoLabel} className="transition-all duration-300 group-hover:-translate-y-1 group-hover:border-accent/30">
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, 45vw"
-                      />
-                    </div>
-                  </BrowserFrame>
-                  <div className="px-1 pt-5">
-                    <span className="text-[11px] font-medium uppercase tracking-widest text-accent">
-                      {project.category}
-                    </span>
-                    <h3 className="mt-2 font-display text-xl font-bold text-foreground">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">
-                      {project.pitch}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {project.stack.slice(0, 4).map((tech) => (
-                        <TechBadge key={tech} name={tech} />
-                      ))}
-                      {project.stack.length > 4 && (
-                        <span className="inline-flex items-center rounded-md border border-zinc-500/20 bg-zinc-500/10 px-2 py-0.5 text-[11px] font-medium text-muted">
-                          +{project.stack.length - 4}
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-5 inline-flex items-center gap-1 text-xs font-semibold text-accent transition-all group-hover:gap-2">
-                      View Case Study
-                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </div>
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    {appsIn(layer).map((a) => {
+                      const shot = firstShot(a.slug);
+                      const ai = a.features.some((f) => f.ai);
+                      return (
+                        <Link key={a.slug} href={`/projects/${a.slug}`} className="group overflow-hidden rounded-xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-accent/40">
+                          <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-surface">
+                            {shot ? (
+                              <Image src={shot.src} alt="" fill className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" sizes="(max-width: 640px) 100vw, 25vw" />
+                            ) : (
+                              <div className="flex h-full items-center justify-center font-display text-2xl text-muted/40">{a.name}</div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="font-semibold text-foreground group-hover:text-accent">{a.name}</span>
+                              {ai && <AiBadge />}
+                            </div>
+                            <p className="mt-1 text-xs text-muted">{a.role}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
-                </Link>
+                </div>
               </Reveal>
             ))}
+
+            <Reveal>
+              <div className="grid gap-4 lg:grid-cols-[13rem_1fr]">
+                <div className="pt-1">
+                  <h3 className="font-display text-lg font-bold text-foreground">{layers.platform.label}</h3>
+                  <p className="mt-1 text-sm text-muted">{layers.platform.blurb}</p>
+                </div>
+                <div className="rounded-xl border border-border bg-card p-5">
+                  <div className="flex flex-wrap gap-2">
+                    {platform.map((p) => (
+                      <span key={p.title} className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-sm text-foreground">
+                        {p.ai && <span className="h-1.5 w-1.5 rounded-full bg-violet-500" aria-hidden="true" />}
+                        {p.title}
+                      </span>
+                    ))}
+                  </div>
+                  <Link href="/platform" className="mt-4 inline-flex text-sm font-semibold text-accent hover:underline">
+                    See the platform
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
-        {/* CTA Section */}
         <Reveal>
-          <section className="mb-20 rounded-2xl border border-accent/20 bg-accent/5 p-12 text-center">
-            <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
-              Let&apos;s ship production AI
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-muted">
-              I build LLM features, RAG systems, and full-stack platforms that go
-              live, not demos that sit in a slide deck. Looking for an engineer
-              who ships?
+          <section id="eval" className="mb-20 scroll-mt-24 overflow-hidden rounded-2xl border border-accent/20 bg-accent/5">
+            <div className="grid gap-8 p-8 sm:p-12 lg:grid-cols-[1.3fr_1fr] lg:items-center">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-widest text-accent">Case study · Evals in production</span>
+                <h2 className="mt-3 font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  The cash forecast has a referee
+                </h2>
+                <p className="mt-4 leading-relaxed text-muted">
+                  An independent service grades the production cash forecast every week against money that actually
+                  landed. Its first run caught a naive same-week-last-year baseline beating the model 2.3x. The fix
+                  shipped on evidence, and nothing changes now without clearing a noise gate.
+                </p>
+                <Link href="/projects/cash-forecast-eval" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-all hover:scale-[1.02]">
+                  Read the case study
+                </Link>
+              </div>
+              <dl className="grid grid-cols-2 gap-3">
+                {[
+                  ["84%", "Live accuracy, rolling 4-week"],
+                  ["92%", "Best replay candidate"],
+                  ["2.3x", "Baseline beat the first model"],
+                  ["95%", "Target"],
+                ].map(([v, l]) => (
+                  <div key={l} className="rounded-xl border border-border bg-background p-4">
+                    <dt className="sr-only">{l}</dt>
+                    <dd className="font-display text-3xl font-bold text-foreground">{v}</dd>
+                    <dd className="mt-1 text-xs text-muted">{l}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </section>
+        </Reveal>
+
+        <section className="pb-12">
+          <Reveal>
+            <SectionLabel>Inside the apps</SectionLabel>
+          </Reveal>
+          <div className="mt-10 space-y-20">
+            {showcase.map((slug, i) => {
+              const a = apps.find((x) => x.slug === slug)!;
+              const shot = firstShot(slug);
+              return (
+                <Reveal key={slug}>
+                  <article className="grid items-center gap-10 lg:grid-cols-2">
+                    <div className={i % 2 ? "lg:order-2" : ""}>
+                      <span className="text-xs font-semibold uppercase tracking-widest text-accent">{a.role}</span>
+                      <h3 className="mt-2 font-display text-3xl font-bold text-foreground">{a.name}</h3>
+                      <p className="mt-3 leading-relaxed text-muted">{a.tagline}</p>
+                      <ul className="mt-5 space-y-2">
+                        {a.features.slice(0, 4).map((f) => (
+                          <li key={f.title} className="flex items-start gap-2 text-sm text-foreground/90">
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                            <span>
+                              <span className="font-semibold">{f.title}:</span> <span className="text-muted">{f.items[0]}</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <Link href={`/projects/${slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3">
+                        Full walkthrough
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </Link>
+                    </div>
+                    {shot && (
+                      <Link href={`/projects/${slug}`} className="group block" aria-label={`${a.name} walkthrough`}>
+                        <BrowserFrame url={a.domain} className="transition-transform duration-500 group-hover:scale-[1.01]">
+                          <Image src={shot.src} alt={shot.caption} width={shot.w} height={shot.h} className="w-full" sizes="(max-width: 1024px) 100vw, 50vw" />
+                        </BrowserFrame>
+                      </Link>
+                    )}
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+
+        <Reveal>
+          <section className="mb-20 mt-12 rounded-2xl border border-border bg-card p-10 text-center sm:p-12">
+            <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">Want this inside your company?</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted">
+              I map how the work really flows, decide what should be code, agents, or people, and ship it inside the
+              tools your team already uses.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="mailto:dougkvamme@gmail.com"
-                className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-accent/20"
-              >
-                Get in Touch
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <a href="mailto:dougkvamme@gmail.com" className="inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.02]">
+                Get in touch
               </a>
-              <a
-                href="https://linkedin.com/in/dougkvamme"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground transition-all hover:border-accent/30 hover:bg-card"
-              >
-                Connect on LinkedIn
-              </a>
+              <Link href="/method" className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/30">
+                Read the method
+              </Link>
             </div>
           </section>
         </Reveal>

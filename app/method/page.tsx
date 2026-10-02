@@ -221,7 +221,7 @@ export default function MethodPage() {
               <span className="h-px flex-1 bg-border" />
             </div>
             <p className="mt-6 max-w-3xl text-muted">
-              Four workflows from Story Time Chess, each sorted step by step. All
+              Four workflows from my current company, each sorted step by step. All
               of them are live and run by non-technical operators.
             </p>
           </Reveal>

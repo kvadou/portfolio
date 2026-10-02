@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects } from "@/lib/projects";
+import { apps } from "@/lib/system";
 
 export function Footer() {
   return (
@@ -21,16 +21,16 @@ export function Footer() {
           </div>
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-widest text-accent">
-              Projects
+              The system
             </h3>
             <ul className="mt-4 space-y-2.5">
-              {projects.map((p) => (
+              {apps.map((p) => (
                 <li key={p.slug}>
                   <Link
                     href={`/projects/${p.slug}`}
                     className="link-underline text-sm text-muted transition-colors hover:text-foreground"
                   >
-                    {p.title}
+                    {p.name}
                   </Link>
                 </li>
               ))}
