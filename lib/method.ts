@@ -58,7 +58,7 @@ export const cases: {
   {
     title: "SaaS spend teardown",
     context:
-      "Software and card spend had drifted to about $20k a month at a ~$3M company. Renewals auto-charged, seats outlived the people using them, and nobody owned the question of whether a tool was still needed.",
+      "Software and card spend had drifted to about $20k a month at a small company. Renewals auto-charged, seats outlived the people using them, and nobody owned the question of whether a tool was still needed.",
     sort: [
       { step: "Finance skims the monthly statement for anything odd", bucket: "delete" },
       { step: "Join card transactions to SSO logins, seat counts, and owners", bucket: "code" },

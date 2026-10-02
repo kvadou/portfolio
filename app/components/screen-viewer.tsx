@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import type { Shot } from "@/lib/system";
 import { ScreenFrame } from "./screen-frame";
+import { Lightbox } from "./lightbox";
 
 export interface ViewerApp {
   slug: string;
@@ -12,8 +14,7 @@ export interface ViewerApp {
   domain: string;
   tagline: string;
   features: { title: string; item: string; ai?: boolean }[];
-  shot: { src: string; caption: string; w: number; h: number };
-  shotCount: number;
+  shots: Shot[];
 }
 
 // Tabs over one console pane: the visitor flips through real screens without
@@ -21,7 +22,10 @@ export interface ViewerApp {
 export function ScreenViewer({ items }: { items: ViewerApp[] }) {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [zoom, setZoom] = useState<number | null>(null);
   const app = items[active];
+  const shot = app.shots[0];
+  const closeZoom = useCallback(() => setZoom(null), []);
 
   const move = (to: number) => {
     const next = (to + items.length) % items.length;
@@ -68,20 +72,29 @@ export function ScreenViewer({ items }: { items: ViewerApp[] }) {
         aria-labelledby={`tab-${app.slug}`}
         className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12"
       >
-        <Link href={`/projects/${app.slug}`} className="group block" aria-label={`Open the ${app.name} walkthrough`}>
-          <ScreenFrame domain={app.domain} right={`${app.shotCount} screens`}>
-            <div className="relative overflow-hidden" style={{ aspectRatio: `${app.shot.w} / ${app.shot.h}` }}>
+        <button
+          type="button"
+          onClick={() => setZoom(0)}
+          className="group block w-full cursor-zoom-in text-left"
+          aria-label={`Zoom into ${app.name} screens`}
+        >
+          <ScreenFrame domain={app.domain} right={`${app.shots.length} screens`}>
+            <div className="relative overflow-hidden" style={{ aspectRatio: `${shot.w} / ${shot.h}` }}>
               <Image
-                key={app.shot.src}
-                src={app.shot.src}
-                alt={app.shot.caption}
+                key={shot.src}
+                src={shot.src}
+                alt={shot.caption}
                 fill
                 className="animate-fade-in object-contain object-top transition-transform duration-700 group-hover:scale-[1.015]"
                 sizes="(max-width: 1024px) 100vw, 820px"
               />
+              <span className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-ink/85 px-2.5 py-1.5 text-xs font-medium text-panel transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
+                <span className="sm:hidden">Tap to zoom</span>
+                <span className="hidden sm:inline">Zoom in</span>
+              </span>
             </div>
           </ScreenFrame>
-        </Link>
+        </button>
 
         <div key={app.slug} className="animate-rise">
           <p className="data text-signal">{app.role}</p>
@@ -109,6 +122,7 @@ export function ScreenViewer({ items }: { items: ViewerApp[] }) {
           </Link>
         </div>
       </div>
+      {zoom !== null && <Lightbox shots={app.shots} index={zoom} onIndex={setZoom} onClose={closeZoom} />}
     </div>
   );
 }

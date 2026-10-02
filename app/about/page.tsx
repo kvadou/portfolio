@@ -7,7 +7,7 @@ import { formatCount, totalCommits, totalWeeks } from "@/lib/activity";
 export const metadata: Metadata = {
   title: "About · Doug Kvamme",
   description:
-    "Forward deployed AI engineer: maps real business processes, re-engineers them around agents, and ships ten production apps and their AI platform for a $3M education company as its only engineer.",
+    "Forward deployed AI engineer: maps real business processes, re-engineers them around agents, and ships ten production apps and their AI platform for a multi-market education company as its only engineer.",
 };
 
 const log = [
@@ -45,7 +45,7 @@ export default function AboutPage() {
             </h1>
             <div className="mt-8 max-w-[60ch] space-y-5 text-lg leading-relaxed text-ink-2">
               <p>
-                I&apos;m a forward deployed AI engineer. As the only engineer at a $3M multi-market education company, I
+                I&apos;m a forward deployed AI engineer. As the only engineer at a multi-market education company, I
                 designed and shipped its whole operating system: ten production apps for staff, tutors, families, schools,
                 and franchise owners, plus the model gateway, eval harness, warehouse, and reliability layer underneath.
               </p>

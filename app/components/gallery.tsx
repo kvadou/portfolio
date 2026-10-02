@@ -1,35 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import type { Shot } from "@/lib/system";
 import { ScreenFrame } from "./screen-frame";
+import { Chevron, Lightbox } from "./lightbox";
 
 export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
   const [index, setIndex] = useState(0);
   const [open, setOpen] = useState(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const lastFocus = useRef<HTMLElement | null>(null);
   const count = shots.length;
   const go = useCallback((d: number) => setIndex((i) => (i + d + count) % count), [count]);
-
-  useEffect(() => {
-    if (!open) return;
-    lastFocus.current = document.activeElement as HTMLElement;
-    closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-      if (e.key === "ArrowRight") go(1);
-      if (e.key === "ArrowLeft") go(-1);
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      lastFocus.current?.focus();
-    };
-  }, [open, go]);
+  const close = useCallback(() => setOpen(false), []);
 
   if (!count) return null;
   const shot = shots[index];
@@ -59,8 +41,9 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
             sizes="(max-width: 1024px) 100vw, 1100px"
             priority={index === 0}
           />
-          <span className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-ink/85 px-2.5 py-1.5 text-xs font-medium text-panel opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-            Enlarge
+          <span className="pointer-events-none absolute bottom-3 right-3 rounded-md bg-ink/85 px-2.5 py-1.5 text-xs font-medium text-panel opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
+            <span className="sm:hidden">Tap to zoom</span>
+            <span className="hidden sm:inline">Enlarge</span>
           </span>
         </button>
       </ScreenFrame>
@@ -100,52 +83,7 @@ export function Gallery({ shots, domain }: { shots: Shot[]; domain: string }) {
         </div>
       )}
 
-      {open && (
-        <div
-          className="fixed inset-0 z-[100] flex flex-col bg-ink/95"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Screenshot viewer"
-          onClick={() => setOpen(false)}
-        >
-          <div className="flex items-center justify-between px-4 py-3 text-sm text-white/80 sm:px-6">
-            <span className="font-mono text-xs">
-              {index + 1} / {count}
-            </span>
-            <button
-              ref={closeRef}
-              type="button"
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-1.5 text-white hover:bg-white/10"
-            >
-              Close <span className="text-white/50">Esc</span>
-            </button>
-          </div>
-          <div className="relative flex min-h-0 flex-1 items-center justify-center px-2 sm:px-16" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={shot.src}
-              alt={shot.caption}
-              width={shot.w}
-              height={shot.h}
-              className="max-h-full w-auto max-w-full rounded-lg object-contain"
-              sizes="100vw"
-            />
-            {count > 1 && (
-              <>
-                <button type="button" aria-label="Previous screenshot" onClick={() => go(-1)} className="absolute left-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:block">
-                  <Chevron dir="prev" />
-                </button>
-                <button type="button" aria-label="Next screenshot" onClick={() => go(1)} className="absolute right-2 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:block">
-                  <Chevron dir="next" />
-                </button>
-              </>
-            )}
-          </div>
-          <p className="mx-auto max-w-3xl px-6 py-4 text-center text-sm text-white/80" onClick={(e) => e.stopPropagation()}>
-            {shot.caption}
-          </p>
-        </div>
-      )}
+      {open && <Lightbox shots={shots} index={index} onIndex={setIndex} onClose={close} />}
     </div>
   );
 }
@@ -160,13 +98,5 @@ function NavButton({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void
     >
       <Chevron dir={dir} />
     </button>
-  );
-}
-
-function Chevron({ dir }: { dir: "prev" | "next" }) {
-  return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d={dir === "prev" ? "M15 19l-7-7 7-7" : "M9 5l7 7-7 7"} />
-    </svg>
   );
 }

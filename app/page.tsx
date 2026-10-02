@@ -38,8 +38,7 @@ export default function Home() {
         domain: a.domain,
         tagline: a.tagline,
         features: a.features.slice(0, 3).map((f) => ({ title: f.title, item: f.items[0], ai: f.ai })),
-        shot: shots[0],
-        shotCount: shots.length,
+        shots,
       },
     ];
   });
