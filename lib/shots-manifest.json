@@ -1,4 +1,12 @@
 {
+  "classroom": [
+    {
+      "file": "01-live-classroom.webp",
+      "caption": "Live classroom (tutor view): synced board with a loaded position, notation, a control panel for FEN/PGN, homework, courses and players, live chat, puzzle mode, quizzes, games and sticker rewards, with video tiles for up to four students.",
+      "w": 2400,
+      "h": 1117
+    }
+  ],
   "family": [
     {
       "file": "01-journey.webp",
