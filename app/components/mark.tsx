@@ -1,16 +1,5 @@
-// Identity marks that replace the old DK monogram. `MARK` picks the live one;
-// /brand shows every variant side by side.
-export type MarkVariant = "signal" | "board" | "period" | "plain";
-
-export const MARK: MarkVariant = "board";
-
-export const markVariants: { id: MarkVariant; name: string; note: string }[] = [
-  { id: "signal", name: "Signal", note: "Name plus the live green status dot from the board. Quiet, reads as 'in production'." },
-  { id: "board", name: "Board glyph", note: "A tiny four-row commit strip as the symbol. Works alone as a favicon." },
-  { id: "period", name: "Full stop", note: "Lowercase heavy wordmark ending in a green square. Most graphic, most confident." },
-  { id: "plain", name: "No logo", note: "Just the name, set well. Nothing to like or dislike." },
-];
-
+// Identity mark: a tiny four-row commit strip (the system board in
+// miniature) beside the name. app/icon.svg is the same glyph.
 export function BoardGlyph({ size = 18, className = "" }: { size?: number; className?: string }) {
   const rows = [
     [3, 5, 4, 7, 6],
@@ -38,29 +27,10 @@ export function BoardGlyph({ size = 18, className = "" }: { size?: number; class
   );
 }
 
-export function Mark({ variant = MARK, className = "" }: { variant?: MarkVariant; className?: string }) {
-  if (variant === "board") {
-    return (
-      <span className={`inline-flex items-center gap-2.5 ${className}`}>
-        <BoardGlyph size={22} />
-        <span className="text-[1.05rem] font-bold tracking-[-0.02em] text-ink">Doug Kvamme</span>
-      </span>
-    );
-  }
-  if (variant === "period") {
-    return (
-      <span className={`inline-flex items-baseline text-[1.35rem] font-extrabold tracking-[-0.04em] text-ink ${className}`}>
-        kvamme
-        <span className="ml-[1px] inline-block h-[0.32em] w-[0.32em] bg-signal-bright" aria-hidden="true" />
-      </span>
-    );
-  }
-  if (variant === "plain") {
-    return <span className={`text-[1.05rem] font-bold tracking-[-0.02em] text-ink ${className}`}>Doug Kvamme</span>;
-  }
+export function Mark({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <span className="beacon h-2.5 w-2.5 rounded-full bg-signal-bright" aria-hidden="true" />
+      <BoardGlyph size={22} />
       <span className="text-[1.05rem] font-bold tracking-[-0.02em] text-ink">Doug Kvamme</span>
     </span>
   );
