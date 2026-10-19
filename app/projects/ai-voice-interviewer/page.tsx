@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { shotsFor } from "@/lib/system";
 import { Reveal } from "@/app/components/reveal";
+import { Gallery } from "@/app/components/gallery";
 import { SectionLabel } from "@/app/components/section-label";
 import { AiBadge } from "@/app/components/ai-badge";
 import { TechBadge } from "@/app/components/tech-badge";
@@ -8,7 +11,7 @@ import { TechBadge } from "@/app/components/tech-badge";
 export const metadata: Metadata = {
   title: "AI Voice Interviewer · Doug Kvamme",
   description:
-    "Bella, a voice AI phone screen for tutor hiring: grounded in real recruiter calls, scored on a weighted rubric, run in production, and retired on purpose when candidates told us they wanted a human first.",
+    "Ada, a voice AI phone screen for tutor hiring: grounded in real recruiter calls, scored on a weighted rubric, run in production, and retired on purpose when candidates told us they wanted a human first.",
 };
 
 const flow = [
@@ -22,7 +25,7 @@ const flow = [
   },
   {
     title: "Voice call in the browser",
-    body: "Strong text screens unlock a live voice interview with Bella over WebRTC, with live captions. Calls that are too short or have no candidate audio are marked failed, not scored, and can be retried.",
+    body: "Strong text screens unlock a live voice interview with Ada over WebRTC, with live captions. Calls that are too short or have no candidate audio are marked failed, not scored, and can be retried.",
   },
   {
     title: "Signed webhooks",
@@ -92,6 +95,10 @@ const caveats = [
 ];
 
 export default function AiVoiceInterviewerPage() {
+  const shots = shotsFor("ai-voice-interviewer");
+  const candidateDesk = shots.filter((s) => /\/0[12]-/.test(s.src));
+  const candidatePhone = shots.filter((s) => /\/0[34]-/.test(s.src));
+  const recruiter = shots.filter((s) => !/\/0[1-4]-/.test(s.src));
   return (
     <>
       <section>
@@ -111,7 +118,7 @@ export default function AiVoiceInterviewerPage() {
               A voice AI interviewer, built from my own phone screens
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted sm:text-xl">
-              After a decade of recruiting, I was still doing about 50 tutor phone screens a month. I built Bella, a voice
+              After a decade of recruiting, I was still doing about 50 tutor phone screens a month. I built Ada, a voice
               AI interviewer inside our applicant tracking system that runs a structured first conversation in the
               browser, scores it on a weighted rubric, and hands a recruiter the transcript, recording, and evidence. It
               ran in production for our headquarters markets, and then we retired it on purpose.
@@ -172,6 +179,50 @@ export default function AiVoiceInterviewerPage() {
                 </li>
               ))}
             </ol>
+          </Reveal>
+        </section>
+
+        <section className="pb-16">
+          <Reveal>
+            <SectionLabel>What the candidate sees</SectionLabel>
+            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-muted">
+              Everything happens on the applicant&apos;s private status page: a short text chat, then a browser voice
+              interview they can start right away or schedule for later. Most hourly applicants are on a phone, so it
+              was built mobile first.
+            </p>
+          </Reveal>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-start">
+            <Reveal>
+              <Gallery shots={candidateDesk} domain="hiring.kingside.app/status" />
+            </Reveal>
+            <Reveal delay={100}>
+              <div className="grid grid-cols-2 gap-4">
+                {candidatePhone.map((s) => (
+                  <figure key={s.src}>
+                    <div className="overflow-hidden rounded-[14px] border border-rule bg-panel">
+                      <Image src={s.src} alt={s.caption} width={s.w} height={s.h} className="h-auto w-full" sizes="(min-width: 1024px) 11rem, 45vw" />
+                    </div>
+                    <figcaption className="data mt-2 text-ink-2">{s.src.includes("candidate-voice") ? "Voice step on a phone" : "Chat on a phone"}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="pb-16">
+          <Reveal>
+            <SectionLabel>What the recruiter sees</SectionLabel>
+            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-muted">
+              The scorecard, the evidence behind it, the full transcript, and a decision that stays with a person. Admins
+              get a queue of every screening and a playground to test the scorer on mock applicants.
+            </p>
+            <div className="mt-8">
+              <Gallery shots={recruiter} domain="hiring.kingside.app" />
+            </div>
+            <p className="data mt-4 text-ink-2">
+              Captured from a local demo environment. Every candidate, score, cost, and transcript shown is fictional.
+            </p>
           </Reveal>
         </section>
 

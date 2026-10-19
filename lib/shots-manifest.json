@@ -302,5 +302,67 @@
       "w": 1512,
       "h": 895
     }
+  ],
+  "ai-voice-interviewer": [
+    {
+      "file": "01-candidate-chat.webp",
+      "caption": "Candidate side: the AI recruiter Ada runs a friendly text screen right on the applicant's status page, with typed or recorded voice answers",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "02-candidate-voice.webp",
+      "caption": "Candidate side: after the chat, the status page invites the applicant to a 10-minute in-browser voice interview with Ada, no phone or scheduling needed",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "03-candidate-chat-mobile.webp",
+      "caption": "Candidate side on a phone: the Ada screening chat is built mobile-first, since most hourly applicants apply from their phones",
+      "w": 1170,
+      "h": 2532
+    },
+    {
+      "file": "04-candidate-voice-mobile.webp",
+      "caption": "Candidate side on a phone: the voice interview card with prep tips, Start Now, and an option to schedule the call for later",
+      "w": 1170,
+      "h": 2532
+    },
+    {
+      "file": "05-recruiter-scorecard.webp",
+      "caption": "Recruiter side: Ada's voice screen scorecard with an overall score, an Advance recommendation, and six weighted dimensions from creativity to chess familiarity",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "06-recruiter-transcript.webp",
+      "caption": "Recruiter side: AI-written strengths and concerns sit above the full voice call transcript, so a recruiter can check every claim against what the candidate said",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "07-recruiter-decision.webp",
+      "caption": "Recruiter side: a human makes the call. Recruiters record Advance, Review, or Reject and rate Ada's accuracy, which feeds the calibration audit",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "09-hub-screenings.webp",
+      "caption": "Recruiter side: every AI screening in one queue with scores, recommendations, knockouts, and a Needs Review filter for borderline candidates",
+      "w": 2400,
+      "h": 1700
+    },
+    {
+      "file": "11-hub-playground.webp",
+      "caption": "Recruiter side: the Playground lets admins role-play mock applicants against the same scoring engine without touching the real pipeline",
+      "w": 2400,
+      "h": 1910
+    },
+    {
+      "file": "12-interview-history.webp",
+      "caption": "Recruiter side: before an interview, the interviewer sees Ada's voice screen summary and transcript in the candidate's history, with AI scores hidden until they submit their own scorecard",
+      "w": 2400,
+      "h": 2372
+    }
   ]
 }
