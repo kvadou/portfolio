@@ -131,7 +131,7 @@ export const apps: App[] = [
       { title: "Pipeline", items: ["Kanban per job, review board, triage", "Stage rules, SLA targets, undo a reject", "Starred shortlists and bulk moves"] },
       { title: "Candidate AI", items: ["Application scoring against a weighted rubric", "Keyword plus pgvector matching", "Resume parsing and success traits, with an eval harness"], ai: true },
       { title: "Interview AI", items: ["Whisper transcription and AI summaries", "AI scorecards and interview kits", "Talk-time analytics"], ai: true },
-      { title: "Async screens", items: ["Recorded teaching-sample track with teleprompter and trim", "AI voice phone-screen agent with question sets (built, gated off)"], ai: true },
+      { title: "Async screens", items: ["Recorded teaching-sample track with teleprompter and trim", "Voice AI interviewer with a weighted scorecard (ran in production, retired on purpose)"], ai: true },
       { title: "Scheduling", items: ["Calendar and video integration", "Candidate self-serve times and reschedule", "Interviewer groups and attendance"] },
       { title: "Jobs and compliance", items: ["Job setup wizard with kits and scorecards", "Multi-board syndication with pay-transparency gates", "Background checks and per-jurisdiction requirements"] },
       { title: "Offers and onboarding", items: ["Offer form with cohort and a five-step hire checklist", "E-signature and welcome email you can edit before sending"] },

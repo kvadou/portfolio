@@ -9,6 +9,7 @@ import { Mark } from "./mark";
 const links = [
   { href: "/platform", label: "Platform" },
   { href: "/projects/cash-forecast-eval", label: "Evals" },
+  { href: "/projects/ai-voice-interviewer", label: "Voice AI" },
   { href: "/method", label: "Method" },
   { href: "/about", label: "About" },
 ];
@@ -79,7 +80,7 @@ export function Nav() {
               aria-controls="apps-menu"
               onClick={() => setAppsOpen((o) => !o)}
               className={`inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-ink ${
-                pathname.startsWith("/projects/") && pathname !== "/projects/cash-forecast-eval" ? "text-ink" : "text-ink-2"
+                pathname.startsWith("/projects/") && pathname !== "/projects/cash-forecast-eval" && pathname !== "/projects/ai-voice-interviewer" ? "text-ink" : "text-ink-2"
               }`}
             >
               Apps

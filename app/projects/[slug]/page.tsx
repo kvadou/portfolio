@@ -56,6 +56,11 @@ export default async function AppPage({ params }: { params: Promise<{ slug: stri
               <span className="font-semibold text-foreground">Used by: </span>
               {app.users}
             </p>
+            {app.slug === "hiring" && (
+              <Link href="/projects/ai-voice-interviewer" className="mt-6 inline-flex min-h-11 items-center font-semibold text-ink link-underline">
+                Case study: the voice AI interviewer
+              </Link>
+            )}
           </div>
 
           <div className="mt-10 overflow-hidden rounded-[14px] border border-rule bg-panel lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
