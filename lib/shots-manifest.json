@@ -364,5 +364,55 @@
       "w": 2400,
       "h": 2372
     }
+  ],
+  "cubby": [
+    {
+      "file": "01-inbox.webp",
+      "caption": "The director's queue at Little Oaks: one understaffed room tomorrow, five past-due families, four stale waitlist entries, each with the facts behind it",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "02-review.webp",
+      "caption": "Reviewing a tuition nudge before it goes to the family: the director edits the message, and nothing is sent until they approve it",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "03-ios-today.webp",
+      "caption": "iPhone, Today: whether Meryl is checked in, then two weeks of drop-offs and pickups in the center's time zone",
+      "w": 1206,
+      "h": 2622
+    },
+    {
+      "file": "04-ios-messages.webp",
+      "caption": "iPhone, Messages: the tuition note the director approved arrives unread, written in the same transaction as the approval",
+      "w": 1206,
+      "h": 2622
+    },
+    {
+      "file": "05-ios-billing.webp",
+      "caption": "iPhone, Billing: past-due tuition first with the total due, then paid invoices",
+      "w": 1206,
+      "h": 2622
+    },
+    {
+      "file": "06-android-today.webp",
+      "caption": "Android, Today: the same day view in Kotlin and Jetpack Compose",
+      "w": 1080,
+      "h": 2424
+    },
+    {
+      "file": "07-android-messages.webp",
+      "caption": "Android, Messages: the same approved note, unread, with the badge on the tab",
+      "w": 1080,
+      "h": 2424
+    },
+    {
+      "file": "08-android-billing.webp",
+      "caption": "Android, Billing: past due first, then paid",
+      "w": 1080,
+      "h": 2424
+    }
   ]
 }

@@ -61,6 +61,7 @@ export function Footer() {
               <Link href="/platform" className="text-field-ink-2 hover:text-field-ink">Platform</Link>
               <Link href="/projects/cash-forecast-eval" className="text-field-ink-2 hover:text-field-ink">Evals</Link>
               <Link href="/projects/ai-voice-interviewer" className="text-field-ink-2 hover:text-field-ink">Voice AI</Link>
+              <Link href="/projects/cubby" className="text-field-ink-2 hover:text-field-ink">Cubby</Link>
               <Link href="/method" className="text-field-ink-2 hover:text-field-ink">Method</Link>
               <Link href="/about" className="text-field-ink-2 hover:text-field-ink">About</Link>
             </div>

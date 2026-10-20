@@ -131,6 +131,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* A personal project on someone else's stack, live for anyone to try. */}
+      <section className="border-b border-rule">
+        <div className="mx-auto grid max-w-[1200px] gap-8 px-4 py-16 md:px-8 md:py-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <Reveal>
+            <p className="data text-signal">Personal project, live</p>
+            <h2 className="mt-4 max-w-[24ch] text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink">
+              Cubby: the same instincts, on a stack I hadn&apos;t shipped before.
+            </h2>
+            <p className="mt-5 max-w-[60ch] leading-relaxed text-muted">
+              An operations copilot for preschool directors in Rails, React and TypeScript, SwiftUI, and Kotlin, deployed
+              with Terraform to AWS. Rules find the work, a model drafts, a director approves, and parents see it on
+              their phones. Try it in one click.
+            </p>
+          </Reveal>
+          <Reveal delay={100}>
+            <Link
+              href="/projects/cubby"
+              className="inline-flex min-h-12 items-center gap-2.5 rounded-lg bg-ink px-5 font-semibold text-paper transition-colors hover:bg-ink-2"
+            >
+              See Cubby
+              <Arrow />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Method, proven on one real case. */}
       <section className="mx-auto max-w-[1200px] px-4 py-20 md:px-8 md:py-28">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)]">
