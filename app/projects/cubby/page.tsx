@@ -6,6 +6,7 @@ import { Reveal } from "@/app/components/reveal";
 import { Gallery } from "@/app/components/gallery";
 import { SectionLabel } from "@/app/components/section-label";
 import { TechBadge } from "@/app/components/tech-badge";
+import { ScreenFrame } from "@/app/components/screen-frame";
 
 const DEMO = "https://drpv8p7ep5jv3.cloudfront.net";
 const REPO = "https://github.com/kvadou/cubby";
@@ -86,6 +87,9 @@ export default function CubbyPage() {
   const director = shots.filter((s) => /\/0[12]-/.test(s.src));
   const ios = shots.filter((s) => s.src.includes("-ios-"));
   const android = shots.filter((s) => s.src.includes("-android-"));
+  const inbox = director[0];
+  const iphone = ios[0];
+  const pixel = android[1] ?? android[0];
   return (
     <>
       <section>
@@ -96,7 +100,8 @@ export default function CubbyPage() {
             </svg>
             All work
           </Link>
-          <div className="mt-8 max-w-3xl">
+          <div className="mt-8 grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10">
+          <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3">
               <span className="data text-signal">Personal project</span>
               <span className="data inline-flex items-center gap-2 text-ink-2">
@@ -104,7 +109,7 @@ export default function CubbyPage() {
                 Live demo
               </span>
             </div>
-            <h1 className="mt-3 max-w-[22ch] text-[clamp(2.25rem,5vw,4rem)] font-extrabold leading-[1] tracking-[-0.03em] text-ink">
+            <h1 className="mt-3 max-w-[22ch] text-[clamp(2.25rem,4.4vw,3.75rem)] font-extrabold leading-[1] tracking-[-0.03em] text-ink">
               Cubby, an operations copilot for preschool directors
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted sm:text-xl">
@@ -128,6 +133,8 @@ export default function CubbyPage() {
               </a>
             </div>
             <p className="data mt-4 text-ink-2">One click signs you in as a fictional director. No sign-up, nothing to install.</p>
+          </div>
+          <HeroScreens inbox={inbox} iphone={iphone} pixel={pixel} />
           </div>
         </div>
       </section>
@@ -265,5 +272,33 @@ export default function CubbyPage() {
         </section>
       </div>
     </>
+  );
+}
+
+type Shot = ReturnType<typeof shotsFor>[number];
+
+// Desktop inbox with both phone apps overlapping it, so the hero shows all three clients at a glance.
+function HeroScreens({ inbox, iphone, pixel }: { inbox?: Shot; iphone?: Shot; pixel?: Shot }) {
+  if (!inbox) return null;
+  return (
+    <a
+      href={DEMO}
+      aria-label="Open the live demo"
+      className="group relative mx-auto block w-full max-w-[640px] pb-[18%] pr-[6%] lg:mx-0"
+    >
+      <ScreenFrame domain="cubby · director inbox" className="transition-transform duration-300 group-hover:-translate-y-0.5">
+        <Image src={inbox.src} alt={inbox.caption} width={inbox.w} height={inbox.h} priority sizes="(min-width: 1024px) 600px, 100vw" />
+      </ScreenFrame>
+      {iphone && <Phone shot={iphone} className="bottom-0 right-[22%] w-[22%] -rotate-2" />}
+      {pixel && <Phone shot={pixel} className="bottom-[4%] right-0 w-[21%] rotate-2" />}
+    </a>
+  );
+}
+
+function Phone({ shot, className }: { shot: Shot; className: string }) {
+  return (
+    <div className={`absolute overflow-hidden rounded-[18%/8%] border-[5px] border-ink bg-ink frame-shadow ${className}`}>
+      <Image src={shot.src} alt={shot.caption} width={shot.w} height={shot.h} sizes="140px" className="block h-auto w-full" />
+    </div>
   );
 }
