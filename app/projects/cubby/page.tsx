@@ -28,7 +28,7 @@ const loop = [
   },
   {
     title: "A model drafts",
-    body: "For family-facing items, Claude on Bedrock drafts the message from the facts plus the center's own handbook, retrieved with pgvector. Without the model, the director gets plain starting text built from the same facts.",
+    body: "For family-facing items, Claude drafts the message from the facts plus the center's own handbook, and Cubby checks the amounts, names, and citations before a director sees it. A draft that fails the checks falls back to plain starting text built from the same facts.",
   },
   {
     title: "A director decides",
@@ -48,7 +48,7 @@ const layers = [
   { name: "API and jobs", body: "Rails 8.1 in API mode, Sidekiq and sidekiq-cron, PostgreSQL 17 with pgvector, Redis or Valkey" },
   { name: "Director app", body: "React and TypeScript on Vite, TanStack Query, cookie sessions with a same-origin check" },
   { name: "Parent apps", body: "SwiftUI on iOS 18 (Keychain token) and Kotlin with Jetpack Compose on Android 10 (Keystore-encrypted token)" },
-  { name: "AI", body: "Claude and Titan embeddings on Bedrock, handbook retrieval with pgvector, a tool-use agent for questions, and an eval suite that grades drafts" },
+  { name: "AI", body: "Claude on Bedrock or the Anthropic API behind one client (Haiku 5.5 drafts, Sonnet 5.5 agent and judge), handbook retrieval with pgvector or Postgres full text, a tool-use agent for questions, and an eval suite that grades drafts" },
   { name: "Infrastructure", body: "Terraform, Docker, EKS with FluxCD, RDS, ElastiCache, SNS and SQS, S3 and CloudFront, GitHub Actions with OIDC, CloudWatch alarms" },
 ];
 
@@ -76,7 +76,8 @@ const decisions = [
 ];
 
 const caveats = [
-  "The AI drafting, handbook retrieval, agent, and evals are built and tested against a stubbed Bedrock client, but they aren't live. My AWS account is still waiting on Bedrock model access, so the live demo uses the plain starting text.",
+  "My AWS account is still waiting on Bedrock model access, so the live demo runs the same AI code through the Anthropic API instead: one client speaks both, and handbook search uses Postgres full text until Titan embeddings are available.",
+  "Analytics before today is generated demo history, labelled as such on the page. Decisions you make in the demo arrive through the real event pipeline.",
   "All data is fictional and generated with dates relative to today. No real center, family, or child is involved.",
   "The phone apps run in the iOS simulator and Android emulator. They aren't in either app store.",
   "Demo visitors share one director account, and everything they change is reset every night.",
