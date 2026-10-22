@@ -10,7 +10,8 @@ import { CommitStrip } from "@/app/components/commit-strip";
 import { activityFor, formatCount } from "@/lib/activity";
 
 export function generateStaticParams() {
-  return apps.map((a) => ({ slug: a.slug }));
+  // Classroom has its own case-study page at app/projects/classroom.
+  return apps.filter((a) => a.slug !== "classroom").map((a) => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {

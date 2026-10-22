@@ -1,6 +1,54 @@
 {
   "classroom": [
     {
+      "file": "02-tutor-live-lesson.webp",
+      "caption": "Kingside Classroom, tutor view mid-lesson: a live Italian Game attack synced to every student, full notation, captured-material count, a 3x3 control panel, kid-friendly chat, and live video tiles for the tutor and three students.",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "03-student-view.webp",
+      "caption": "The same moment from a student's seat: the tutor's position and notation arrive in real time over WebSockets, with the tutor on video and class chat alongside.",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "04-live-quiz.webp",
+      "caption": "Live guess-the-move quiz: the tutor freezes the position, students answer on their own boards, and results grade themselves (two correct, one miss) before the tutor reveals.",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "05-multiboard-games.webp",
+      "caption": "Breakout games with chess clocks: the tutor runs two student-vs-student games at once, with live mini-boards, running 5+3 clocks and move counts, while the main lesson board stays put.",
+      "w": 2400,
+      "h": 1877
+    },
+    {
+      "file": "06-sticker-reward.webp",
+      "caption": "Positive reinforcement built in: the tutor awards a Checkmate Crown sticker and a crown-and-name celebration animates across the classroom view.",
+      "w": 2400,
+      "h": 1500
+    },
+    {
+      "file": "07-phone-student.webp",
+      "caption": "Kingside Classroom on a phone: the synced board, a picture-in-picture tutor video, and a bottom nav for video, chat, moves and more.",
+      "w": 900,
+      "h": 1948
+    },
+    {
+      "file": "08-parent-dashboard.webp",
+      "caption": "Parent dashboard: curriculum progress, time spent, stickers earned, tutor-written lesson summaries and upcoming lessons for one child.",
+      "w": 2400,
+      "h": 1615
+    },
+    {
+      "file": "09-tutor-lesson-prep.webp",
+      "caption": "Tutor lesson prep: today's classes with rosters, the week ahead, and per-student curriculum progress so the tutor knows where each kid is before class starts.",
+      "w": 2400,
+      "h": 1500
+    },
+    {
       "file": "01-live-classroom.webp",
       "caption": "Live classroom (tutor view): synced board with a loaded position, notation, a control panel for FEN/PGN, homework, courses and players, live chat, puzzle mode, quizzes, games and sticker rewards, with video tiles for up to four students.",
       "w": 2400,
